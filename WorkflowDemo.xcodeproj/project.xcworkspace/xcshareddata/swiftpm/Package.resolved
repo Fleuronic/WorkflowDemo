@@ -1,0 +1,176 @@
+{
+  "pins" : [
+    {
+      "identity" : "dynamiccolor",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/yannickl/DynamicColor",
+      "state" : {
+        "revision" : "d9beca13ca85baa50ee29832d0db5129fba69630",
+        "version" : "5.0.1"
+      }
+    },
+    {
+      "identity" : "enumkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gringoireDM/EnumKit",
+      "state" : {
+        "revision" : "ae639dfac5c7116abb64c5f62124915f627140e4",
+        "version" : "1.1.3"
+      }
+    },
+    {
+      "identity" : "ergo",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/Ergo",
+      "state" : {
+        "branch" : "main",
+        "revision" : "73055dde79a60d79a400624dd263bc54a19e913a"
+      }
+    },
+    {
+      "identity" : "ergodeclarativeuikit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/ErgoDeclarativeUIKit",
+      "state" : {
+        "branch" : "main",
+        "revision" : "2f286bd5ecf4835cdf13b0736056888ec3990039"
+      }
+    },
+    {
+      "identity" : "ergoswiftui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/ErgoSwiftUI",
+      "state" : {
+        "branch" : "main",
+        "revision" : "4b6ff3ab0f02cb2d7dbf0a16a5087962215918db"
+      }
+    },
+    {
+      "identity" : "ergouikit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/ErgoUIKit",
+      "state" : {
+        "branch" : "main",
+        "revision" : "75ff472831941f68483533cb2e5580b468711797"
+      }
+    },
+    {
+      "identity" : "errorassertions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SlaunchaMan/ErrorAssertions.git",
+      "state" : {
+        "revision" : "fe2b592844372f361f2a33bbbce6a48481b6c79e",
+        "version" : "0.4.0"
+      }
+    },
+    {
+      "identity" : "geometric",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/Geometric",
+      "state" : {
+        "branch" : "main",
+        "revision" : "22c55a44fd68e2dd00ea7ad62bce68ed4d06003f"
+      }
+    },
+    {
+      "identity" : "inject",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/Inject",
+      "state" : {
+        "branch" : "main",
+        "revision" : "630dcabd46c09fb14b9f6a0ab3257523c499f395"
+      }
+    },
+    {
+      "identity" : "layoutless",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/DeclarativeHub/Layoutless",
+      "state" : {
+        "revision" : "50ae5ab4cb9bf676c1901f4ba0f267f27e68d0a7",
+        "version" : "0.4.3"
+      }
+    },
+    {
+      "identity" : "metric",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/Metric",
+      "state" : {
+        "branch" : "main",
+        "revision" : "34a6b5646ae7c131157efc2ecd0f2f1ee63e61a8"
+      }
+    },
+    {
+      "identity" : "reactivecocoa",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ReactiveCocoa/ReactiveCocoa",
+      "state" : {
+        "revision" : "8a5b07b18c6abb8e12fb845bf742675dc4914ed8",
+        "version" : "12.0.0"
+      }
+    },
+    {
+      "identity" : "reactivedatasources",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/ReactiveDataSources",
+      "state" : {
+        "branch" : "master",
+        "revision" : "618c79932ea0476e2a926dba480b9f96e3c70159"
+      }
+    },
+    {
+      "identity" : "reactiveswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ReactiveCocoa/ReactiveSwift.git",
+      "state" : {
+        "branch" : "swift-concurrency",
+        "revision" : "3d40187c982346352d0adbe6b38e0e3d53fddc95"
+      }
+    },
+    {
+      "identity" : "swift-snapshot-testing",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-snapshot-testing",
+      "state" : {
+        "revision" : "cef5b3f6f11781dd4591bdd1dd0a3d22bd609334",
+        "version" : "1.11.0"
+      }
+    },
+    {
+      "identity" : "telemetric",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/Telemetric",
+      "state" : {
+        "branch" : "main",
+        "revision" : "64c2ad3241bb56a843d561494628244e75679bc6"
+      }
+    },
+    {
+      "identity" : "viewinspector",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/nalexn/ViewInspector",
+      "state" : {
+        "branch" : "0.9.7",
+        "revision" : "e42529aa0b6ff57393ab52540f6006f3a709ee00"
+      }
+    },
+    {
+      "identity" : "workflow-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/workflow-swift",
+      "state" : {
+        "branch" : "main",
+        "revision" : "a011407f8512a9f03ffa143be1968112908770c5"
+      }
+    },
+    {
+      "identity" : "workflowcontainers",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Fleuronic/WorkflowContainers",
+      "state" : {
+        "branch" : "main",
+        "revision" : "19e0de86200a7e2d73ca6921781f1f7f27ba69d2"
+      }
+    }
+  ],
+  "version" : 2
+}

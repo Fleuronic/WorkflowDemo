@@ -1,0 +1,38 @@
+{
+  "configurations" : [
+    {
+      "id" : "00277349-66DC-40EE-A041-8D9E2F6B610D",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:WorkflowDemo.xcodeproj",
+        "identifier" : "17127D892A1BCB2F00BE46CE",
+        "name" : "RootUITests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:WorkflowDemo.xcodeproj",
+        "identifier" : "44A6BC2D2A27B8F200F35724",
+        "name" : "DemoListUITests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:WorkflowDemo.xcodeproj",
+        "identifier" : "44A6BC3C2A27B92900F35724",
+        "name" : "CounterUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "58978336-5235-4326-9B4B-E8D38A55A404",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:WorkflowDemo.xcodeproj",
+        "identifier" : "17169A022A1D588700D80EBB",
+        "name" : "SnapshotTests"
+      }
+    }
+  ],
+  "version" : 1
+}

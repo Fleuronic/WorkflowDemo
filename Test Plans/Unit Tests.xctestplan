@@ -1,0 +1,52 @@
+{
+  "configurations" : [
+    {
+      "id" : "EE8E126C-FE7D-44AA-9A2C-AE14E40517E6",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Models",
+        "identifier" : "DemoTests",
+        "name" : "DemoTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Services",
+        "identifier" : "DemoAPITests",
+        "name" : "DemoAPITests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Features",
+        "identifier" : "RootTests",
+        "name" : "RootTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Features",
+        "identifier" : "DemoListTests",
+        "name" : "DemoListTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Features",
+        "identifier" : "CounterTests",
+        "name" : "CounterTests"
+      }
+    }
+  ],
+  "version" : 1
+}

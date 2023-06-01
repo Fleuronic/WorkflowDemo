@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "52D04881-D670-4C01-B014-54B0659147D0",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "CounterTests",
+        "name" : "CounterTests"
+      }
+    }
+  ],
+  "version" : 1
+}

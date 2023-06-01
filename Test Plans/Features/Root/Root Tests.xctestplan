@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "75D454E8-5DAC-4CB7-AFE9-6AFF5DA38764",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "RootTests",
+        "name" : "RootTests"
+      }
+    }
+  ],
+  "version" : 1
+}

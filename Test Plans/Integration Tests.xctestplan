@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "EC6009C1-0F24-4127-A8AE-31AED319AB66",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:WorkflowDemo.xcodeproj",
+        "identifier" : "17127D5B2A1BBCF500BE46CE",
+        "name" : "IntegrationTests"
+      }
+    }
+  ],
+  "version" : 1
+}

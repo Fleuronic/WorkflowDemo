@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "85CE965D-615D-40E2-BEA9-F53C8CF262D2",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:..\/Services",
+        "identifier" : "DemoAPITests",
+        "name" : "DemoAPITests"
+      }
+    }
+  ],
+  "version" : 1
+}

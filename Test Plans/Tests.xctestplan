@@ -1,0 +1,87 @@
+{
+  "configurations" : [
+    {
+      "id" : "60FB8CDC-9FDB-429F-804E-D03BE4890E04",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Models",
+        "identifier" : "DemoTests",
+        "name" : "DemoTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Services",
+        "identifier" : "DemoAPITests",
+        "name" : "DemoAPITests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Features",
+        "identifier" : "RootTests",
+        "name" : "RootTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Features",
+        "identifier" : "DemoListTests",
+        "name" : "DemoListTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Features",
+        "identifier" : "CounterTests",
+        "name" : "CounterTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:WorkflowDemo.xcodeproj",
+        "identifier" : "17127D892A1BCB2F00BE46CE",
+        "name" : "RootUITests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:WorkflowDemo.xcodeproj",
+        "identifier" : "44A6BC2D2A27B8F200F35724",
+        "name" : "DemoListUITests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:WorkflowDemo.xcodeproj",
+        "identifier" : "44A6BC3C2A27B92900F35724",
+        "name" : "CounterUITests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:WorkflowDemo.xcodeproj",
+        "identifier" : "17127D5B2A1BBCF500BE46CE",
+        "name" : "IntegrationTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:WorkflowDemo.xcodeproj",
+        "identifier" : "17169A022A1D588700D80EBB",
+        "name" : "SnapshotTests"
+      }
+    }
+  ],
+  "version" : 1
+}
