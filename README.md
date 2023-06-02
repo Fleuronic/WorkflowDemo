@@ -309,7 +309,7 @@ extension DemoList {
 extension DemoList.View: LayoutProvider {
     typealias Screen = DemoList.Screen
 
-    public func layout(with screen: some ScreenProxy<Screen>) -> AnyLayout {
+    func layout(with screen: some ScreenProxy<Screen>) -> AnyLayout {
         UITableView.style(.insetGrouped).content(
             items: screen.demos,
             text: \.name,
@@ -365,7 +365,7 @@ The main client provided in `DemoAPI` simply sleeps for a given time, then eithe
 
 ```swift
 extension API: LoadingSpec {
-    public func loadDemos() async -> Demo.LoadingResult {
+    func loadDemos() async -> Demo.LoadingResult {
         do {
             try await sleep(.updateTime)
             return randomBool() ? .success(Demo.allCases) : .failure(.loadError)
