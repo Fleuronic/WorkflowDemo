@@ -4,7 +4,7 @@ This project demonstrates how to use Square’s [Workflow](https://github.com/sq
 
 * [Layers](#layers)
 * [Dependencies](#dependencies)
-* [Declarative UIKit](#declarative-uikit-header)
+* [Declarative UIKit](#declarative-uikit-section)
 * [Modules](#modules)
 * [Apps](#apps)
 * [Test Coverage](#test-coverage)
@@ -261,7 +261,8 @@ While SwiftUI boasts live previewing (“hot reloading”), no such functionalit
 
 To exhaustively test all screen, workflow, and view code regardless of UI framework, this project makes use of [swift-snapshot-testing](https://github.com/pointfreeco/swift-snapshot-testing), [ViewInspector](https://github.com/nalexn/ViewInspector), and [ErrorAssertions](https://github.com/SlaunchaMan/ErrorAssertions).
 
-## Declarative UIKit [Declarative UIKit Header] ##
+<a name="declarative-uikit-section"></a>
+## Declarative UIKit
 
 As described above, this project also demonstrates a reimagining of UIKit that uses similar declarative principles as SwiftUI. For example, a `Counter.View` built with Declarative UIKit as opposed to SwiftUI would be implemented as follows, and is shown within the demo app:
 
@@ -391,7 +392,7 @@ Each feature module has a corresponding app to showcase its functionality. To ru
 
 ### RootApp
 
-**This is our “application.”** Users are presented with a list of three demos: SwiftUI, UIKit, and Declarative UIKit. This list can be updated. Selecting an item in the list will start a counter demo built with the associated UI framework. The back button then returns the user to the list of demos. 
+Displayed as “Workflow Demo”, **this is our “application.”** Users are presented with a list of three demos: SwiftUI, UIKit, and Declarative UIKit. This list can be updated. Selecting an item in the list will start a counter demo built with the associated UI framework. The back button then returns the user to the list of demos. 
 
 ### DemoListApp
 
