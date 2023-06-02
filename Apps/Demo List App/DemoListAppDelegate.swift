@@ -13,7 +13,7 @@ extension DemoList.App {
 	@UIApplicationMain
 	final class Delegate: UIResponder {
 		var window: UIWindow?
-		
+
 		@Environment(.canUpdateDemos) private var canUpdateDemos
 		@Environment(.updateDuration) private var updateDuration
 	}

@@ -22,7 +22,7 @@ let package = Package(
 	],
 	dependencies: [
 		.package(name: "Demo", path: "../Models"),
-        .package(name: "DemoService", path: "../Services"),
+		.package(name: "DemoService", path: "../Services"),
 		.package(url: "https://github.com/Fleuronic/ErgoSwiftUI", branch: "main"),
 		.package(url: "https://github.com/Fleuronic/ErgoUIKit", branch: "main"),
 		.package(url: "https://github.com/Fleuronic/ErgoDeclarativeUIKit", branch: "main"),
@@ -43,7 +43,7 @@ let package = Package(
 			name: "DemoList",
 			dependencies: [
 				"Demo",
-                "DemoService",
+				"DemoService",
 				"ErgoDeclarativeUIKit",
 				"WorkflowContainers"
 			]

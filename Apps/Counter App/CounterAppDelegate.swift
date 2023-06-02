@@ -10,7 +10,7 @@ import enum Counter.Counter
 extension Counter.App {
 	@UIApplicationMain final class Delegate: UIResponder {
 		var window: UIWindow?
-		
+
 		@Environment(.demo) private var demo
 	}
 }

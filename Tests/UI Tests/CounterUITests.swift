@@ -7,23 +7,23 @@ final class CounterUITests: XCTestCase {
 		let app = XCUIApplication()
 		app.launchEnvironment = ["demo": "swiftUI"]
 		app.launch()
-		
+
 		demo(in: app)
 	}
-	
+
 	func testUIKit() {
 		let app = XCUIApplication()
 		app.launchEnvironment = ["demo": "uiKit"]
 		app.launch()
-		
+
 		demo(in: app)
 	}
-	
+
 	func testDeclarativeUIKitDemo() {
 		let app = XCUIApplication()
 		app.launchEnvironment = ["demo": "declarativeUIKit"]
 		app.launch()
-		
+
 		demo(in: app)
 	}
 }

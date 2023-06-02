@@ -27,7 +27,7 @@ extension Counter.App.Environment {
 	enum Key: String {
 		case demo
 	}
-	
+
 	enum Value: String {
 		case swiftUI
 		case uiKit

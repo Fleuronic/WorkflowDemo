@@ -64,7 +64,7 @@ final class CounterViewTests: XCTestCase {
 		decrementButton.tap()
 		wait(for: [incrementExpectation, decrementExpectation], enforceOrder: true)
 
-		expectFatalError { let _ = Counter.UIKit.View(coder: .init()) }
+		expectFatalError { _ = Counter.UIKit.View(coder: .init()) }
 	}
 
 	func testDeclarativeUIKitView() throws {

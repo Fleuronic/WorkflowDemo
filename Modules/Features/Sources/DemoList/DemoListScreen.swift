@@ -13,7 +13,7 @@ public extension DemoList {
 	struct Screen {
 		let demos: [Demo]
 		let selectDemo: (Demo) -> Void
-        let canSelectDemo: (Demo) -> Bool
+		let canSelectDemo: (Demo) -> Bool
 		let isUpdatingDemos: Bool
 	}
 }

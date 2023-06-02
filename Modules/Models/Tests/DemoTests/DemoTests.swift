@@ -11,15 +11,15 @@ final class DemoTests: XCTestCase {
 		XCTAssertEqual(Demo.uiKit(declarative: true).name, "Declarative UIKit")
 	}
 
-    func testAllCases() {
-        let demos: [Demo] = [
-            .swiftUI,
-            .uiKit(declarative: false),
-            .uiKit(declarative: true)
-        ]
-        
-        XCTAssertEqual(Demo.allCases, demos)
-    }
+	func testAllCases() {
+		let demos: [Demo] = [
+			.swiftUI,
+			.uiKit(declarative: false),
+			.uiKit(declarative: true)
+		]
+
+		XCTAssertEqual(Demo.allCases, demos)
+	}
 
 	func testID() {
 		let demo = Demo.swiftUI

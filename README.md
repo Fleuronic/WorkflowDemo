@@ -19,11 +19,11 @@ Using the counter example, we start with a `Counter.Screen` struct that describe
 
 ```swift
 extension Counter {
-	struct Screen {
-		let value: Int
-		let increment: () -> Void
-		let decrement: () -> Void
-	}
+    struct Screen {
+        let value: Int
+        let increment: () -> Void
+        let decrement: () -> Void
+    }
 }
 ```
 
@@ -35,29 +35,29 @@ A `Counter.View`, in this example built with SwiftUI, is dependent on a `Counter
 
 ```swift
 extension Counter {
-	struct View {
-		init() {}
-	}
+    struct View {
+        init() {}
+    }
 }
 
 extension Counter.View: BodyProvider {
-	typealias Screen = Counter.Screen
+    typealias Screen = Counter.Screen
 
-	func body(with screen: Screen) -> some View {
-		VStack {
-			Text(screen.valueText)
-			Button(action: screen.increment) {
-				Text(screen.incrementTitle)
-			}
-			Button(action: screen.decrement) {
-				Text(screen.decrementTitle)
-			}
-		}
-	}
+    func body(with screen: Screen) -> some View {
+        VStack {
+            Text(screen.valueText)
+            Button(action: screen.increment) {
+                Text(screen.incrementTitle)
+            }
+            Button(action: screen.decrement) {
+                Text(screen.decrementTitle)
+            }
+        }
+    }
 }
 
 extension Counter.Screen: BodyBackingScreen {
-	typealias View = Counter.View
+    typealias View = Counter.View
 }
 ```
 
@@ -76,7 +76,7 @@ In other instances, the state may also include asynchronous workers, which have 
 
 ```swift
 extension Counter {
-	struct Workflow {}
+    struct Workflow {}
 }
 ```
 
@@ -84,22 +84,22 @@ We can define the workflow incrementally, first by conforming to the `Workflow` 
 
 ```swift
 extension Counter.Workflow: Workflow {
-	typealias Output = Void
+    typealias Output = Void
 
-	func makeInitialState() -> Int { 0 }
+    func makeInitialState() -> Int { 0 }
 
-	func render(
-		state value: Int, 
-		context: RenderContext<Self>
-	) -> Counter.Screen {
-		context.render { (sink: Sink<Action>) in
-			.init(
-				value: value,
-				increment: { sink.send(.increment) },
-				decrement: { sink.send(.decrement) }
-			)
-		}
-	}
+    func render(
+        state value: Int, 
+        context: RenderContext<Self>
+    ) -> Counter.Screen {
+        context.render { (sink: Sink<Action>) in
+            .init(
+                value: value,
+                increment: { sink.send(.increment) },
+                decrement: { sink.send(.decrement) }
+            )
+        }
+    }
 }
 ```
 
@@ -107,11 +107,11 @@ Enums are a natural fit to define a workflow's possible actions:
 
 ```swift
 extension Counter.Workflow {
-	enum Action {
-		case increment
-		case decrement
-		case finish
-	}
+    enum Action {
+        case increment
+        case decrement
+        case finish
+    }
 }
 ```
 
@@ -119,19 +119,19 @@ They must conform to `WorkflowAction` by providing an associated `WorkflowType`,
 
 ```swift
 extension Counter.Workflow.Action: WorkflowAction {
-	typealias WorkflowType = Counter.Workflow
+    typealias WorkflowType = Counter.Workflow
 
-	func apply(toState value: inout Int) -> Void? {
-		switch self {
-		case .increment:
-			value += 1
-		case .decrement:
-			value -= 1
-		case .finish:
-			return ()
-		}
-		return nil
-	}
+    func apply(toState value: inout Int) -> Void? {
+        switch self {
+        case .increment:
+            value += 1
+        case .decrement:
+            value -= 1
+        case .finish:
+            return ()
+        }
+        return nil
+    }
 }
 ```
 
@@ -147,7 +147,7 @@ When using Workflow, the views that comprise your user interface depend on a `Sc
 
 ```swift
 protocol ScreenBacked {
-	associatedtype Screen: WorkflowUI.Screen
+    associatedtype Screen: WorkflowUI.Screen
 }
 ```
 
@@ -157,11 +157,11 @@ In SwiftUI, your view will conform to `BodyProvider`, and must return a SwiftUI 
 
 ```swift
 protocol BodyProvider: ScreenBacked {
-	associatedtype Body: View
+    associatedtype Body: View
 
-	init()
+    init()
 
-	func body(with screen: Screen) -> Body
+    func body(with screen: Screen) -> Body
 }
 ```
 
@@ -172,9 +172,9 @@ In UIKit, your view will conform to `Updating`, and must indicate how it should 
 
 ```swift
 protocol Updating: ScreenBacked {
-	init(screen: Screen)
+    init(screen: Screen)
 
-	func update(with screen: Screen)
+    func update(with screen: Screen)
 }
 ```
 
@@ -185,7 +185,7 @@ In Declarative UIKit, your view will conform to `LayoutProvider`, and must retur
 
 ```swift
 protocol LayoutProvider: ScreenBacked {
-	func layout(with screen: some ScreenProxy<Screen>) -> AnyLayout
+    func layout(with screen: some ScreenProxy<Screen>) -> AnyLayout
 }
 ```
 
@@ -197,9 +197,9 @@ Ergo also provides its own `Worker` class to represent asynchronous work your ap
 
 ```swift
 enum State: CaseAccessible {
-	case ready
-	case working(Input)
-	case failed(Output.Failure)
+    case ready
+    case working(Input)
+    case failed(Output.Failure)
 }
 ```
 
@@ -219,35 +219,33 @@ As described above, this project also demonstrates a reimagining of UIKit that u
 
 ```swift
 extension Counter {
-	final class View: UIView {}
+    final class View: UIView {}
 }
 
 extension Counter.View: LayoutProvider {
-	typealias Screen = Counter.Screen
+    typealias Screen = Counter.Screen
 
-	func layout(with screen: some ScreenProxy<Screen>) -> AnyLayout {
-		UIStackView.vertical.layout {
-			UILabel.default
-				.text(screen.valueText)
-			UIButton.default
-				.title(screen.incrementTitle)
-				.tapped(screen.increment)
-			UIButton.default
-				.title(screen.decrementTitle)
-				.tapped(screen.decrement)
-		}.centeringInParent()
-	}
+    func layout(with screen: some ScreenProxy<Screen>) -> AnyLayout {
+        UIStackView.vertical.layout {
+            UILabel.default
+                .text(screen.valueText)
+            UIButton.default
+                .title(screen.incrementTitle)
+                .tapped(screen.increment)
+            UIButton.default
+                .title(screen.decrementTitle)
+                .tapped(screen.decrement)
+        }.centeringInParent()
+    }
 }
 
 extension Counter.Screen: LayoutBackingScreen {
-	typealias View = Counter.View
+    typealias View = Counter.View
 }
 ```
 
 This makes use of `ErgoDeclarativeUIKit` and the Metric dependency, along with its Geometric and Telemetric submodules (in addition to Layoutless mentioned above). `ReactiveCocoa` and `ReactiveDataSources` powers much of the declarative interface to UIKit elements.
 
 # Modularization
-
-
 
 # Test Coverage

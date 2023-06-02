@@ -10,24 +10,24 @@ import enum Demo.Demo
 import protocol DemoService.LoadingSpec
 
 public extension DemoList {
-    struct Workflow<Service: LoadingSpec> where Service.DemoLoadingResult == Demo.LoadingResult {
-        private let service: Service
-        private let canSelectDemos: Bool
-        
-        public init(service: Service) {
-            self.init(
-                service: service,
-                canSelectDemos: true
-            )
-        }
-        
-        public init(
-            service: Service,
-            canSelectDemos: Bool
-        ) {
-            self.service = service
-            self.canSelectDemos = canSelectDemos
-        }
+	struct Workflow<Service: LoadingSpec> where Service.DemoLoadingResult == Demo.LoadingResult {
+		private let service: Service
+		private let canSelectDemos: Bool
+
+		public init(service: Service) {
+			self.init(
+				service: service,
+				canSelectDemos: true
+			)
+		}
+
+		public init(
+			service: Service,
+			canSelectDemos: Bool
+		) {
+			self.service = service
+			self.canSelectDemos = canSelectDemos
+		}
 	}
 }
 
@@ -43,19 +43,19 @@ extension DemoList.Workflow {
 // MARK: -
 extension DemoList.Workflow: Workflow {
 	public typealias Output = Demo
-	
-    typealias UpdateWorker = Worker<Void, Demo.LoadingResult>
-	
-    public struct State {
+
+	typealias UpdateWorker = Worker<Void, Demo.LoadingResult>
+
+	public struct State {
 		var demos: [Demo]
 		let updateWorker: UpdateWorker
 	}
-	
+
 	public func makeInitialState() -> State {
-        let updateDemos = service.loadDemos
+		let updateDemos = service.loadDemos
 		return .init(
 			demos: Demo.allCases,
-            updateWorker: .ready(to: updateDemos)
+			updateWorker: .ready(to: updateDemos)
 		)
 	}
 
@@ -69,7 +69,7 @@ extension DemoList.Workflow: Workflow {
 					baseScreen: DemoList.Screen(
 						demos: state.demos,
 						selectDemo: { sink.send(.demo($0)) },
-                        canSelectDemo: { _ in canSelectDemos },
+						canSelectDemo: { _ in canSelectDemos },
 						isUpdatingDemos: state.isUpdatingDemos
 					),
 					alert: state.alert
@@ -94,25 +94,25 @@ private extension DemoList.Workflow.State {
 	var isUpdatingDemos: Bool {
 		updateWorker.isWorking
 	}
-	
+
 	var alert: Alert? {
-        updateWorker.errorContext.map(makeAlert)
+		updateWorker.errorContext.map(makeAlert)
 	}
-	
+
 	func makeAlert(
-        error: Demo.LoadingResult.Failure,
-        dismissHandler: @escaping () -> Void
-    ) -> Alert {
+		error: Demo.LoadingResult.Failure,
+		dismissHandler: @escaping () -> Void
+	) -> Alert {
 		.init(
 			title: "Update Error",
-            message: {
-                switch error {
-                case .loadError:
-                    return "The demos could not be updated. Please try again later."
-                case let .sleepError(error):
-                    return error.localizedDescription
-                }
-            }(),
+			message: {
+				switch error {
+				case .loadError:
+					return "The demos could not be updated. Please try again later."
+				case let .sleepError(error):
+					return error.localizedDescription
+				}
+			}(),
 			actions: [
 				.init(
 					title: "Dismiss",

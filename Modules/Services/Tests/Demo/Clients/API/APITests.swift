@@ -5,8 +5,8 @@ import XCTest
 @testable import struct DemoAPI.API
 
 final class APITests: XCTestCase {
-    func testAPI() {
-        let api = API()
-        XCTAssertNotNil(api)
-    }
+	func testAPI() {
+		let api = API()
+		XCTAssertNotNil(api)
+	}
 }

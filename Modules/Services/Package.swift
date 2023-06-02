@@ -16,14 +16,14 @@ let package = Package(
 		)
 	],
 	dependencies: [
-        .package(name: "Models", path: "../Models")
-    ],
+		.package(name: "Models", path: "../Models")
+	],
 	targets: [
 		.target(
 			name: "DemoService",
-            dependencies: [
-                .product(name: "Demo", package: "Models")
-            ],
+			dependencies: [
+				.product(name: "Demo", package: "Models")
+			],
 			path: "Sources/Demo/Service"
 		),
 		.target(
@@ -31,10 +31,10 @@ let package = Package(
 			dependencies: ["DemoService"],
 			path: "Sources/Demo/Clients/API"
 		),
-        .testTarget(
-            name: "DemoAPITests",
-            dependencies: ["DemoAPI"],
-            path: "Tests/Demo/Clients/API"
-        )
+		.testTarget(
+			name: "DemoAPITests",
+			dependencies: ["DemoAPI"],
+			path: "Tests/Demo/Clients/API"
+		)
 	]
 )

@@ -36,82 +36,77 @@ final class CounterWorkflowTests: XCTestCase {
 	}
 
 	func testFinish() {
-		Counter.Workflow.Action
-			.tester(withState: 0)
-			.send(action: .finish)
-			.verifyOutput { XCTAssert($0 == ()) }
+		Counter.Workflow.Action.tester(withState: 0).send(
+			action: .finish
+		).verifyOutput { output in
+			XCTAssert(output == ())
+		}
 	}
 
 	func testRenderingScreen() throws {
-		try Counter.Workflow(demo: .swiftUI)
-			.renderTester()
-			.render { item in
-				let screen = try XCTUnwrap(item.screen.wrappedScreen as? Counter.SwiftUI.Screen)
-				XCTAssertEqual(screen.valueText, "The value is 0")
-				XCTAssertEqual(screen.incrementTitle, "+")
-				XCTAssertEqual(screen.decrementTitle, "-")
-			}
+		try Counter.Workflow(demo: .swiftUI).renderTester().render { item in
+			let screen = try XCTUnwrap(item.screen.wrappedScreen as? Counter.SwiftUI.Screen)
+			XCTAssertEqual(screen.valueText, "The value is 0")
+			XCTAssertEqual(screen.incrementTitle, "+")
+			XCTAssertEqual(screen.decrementTitle, "-")
+		}
 	}
 
 	func testRenderingBarContent() throws {
-		try Counter.Workflow(demo: .swiftUI)
-			.renderTester()
-			.render { item in
-				let barContent = try XCTUnwrap(item.barVisibility[expecting: Bar.Content.self])
-				XCTAssertEqual(barContent.title, "SwiftUI Counter Demo")
-			}
+		try Counter.Workflow(demo: .swiftUI).renderTester().render { item in
+			let barContent = try XCTUnwrap(item.barVisibility[expecting: Bar.Content.self])
+			XCTAssertEqual(barContent.title, "SwiftUI Counter Demo")
+		}
 
-		try Counter.Workflow(demo: .uiKit(declarative: false))
-			.renderTester()
-			.render { item in
-				let screen = try XCTUnwrap(item.screen.wrappedScreen as? Counter.UIKit.Screen)
-				XCTAssertEqual(screen.value, 0)
+		try Counter.Workflow(demo: .uiKit(declarative: false)).renderTester().render { item in
+			let screen = try XCTUnwrap(item.screen.wrappedScreen as? Counter.UIKit.Screen)
+			XCTAssertEqual(screen.value, 0)
 
-				let barContent = try XCTUnwrap(item.barVisibility[expecting: Bar.Content.self])
-				XCTAssertEqual(barContent.title, "UIKit Counter Demo")
-			}
+			let barContent = try XCTUnwrap(item.barVisibility[expecting: Bar.Content.self])
+			XCTAssertEqual(barContent.title, "UIKit Counter Demo")
+		}
 
-		try Counter.Workflow(demo: .uiKit(declarative: true))
-			.renderTester()
-			.render { item in
-				let screen = try XCTUnwrap(item.screen.wrappedScreen as? Counter.DeclarativeUIKit.Screen)
-				XCTAssertEqual(screen.value, 0)
+		try Counter.Workflow(demo: .uiKit(declarative: true)).renderTester().render { item in
+			let screen = try XCTUnwrap(item.screen.wrappedScreen as? Counter.DeclarativeUIKit.Screen)
+			XCTAssertEqual(screen.value, 0)
 
-				let barContent = try XCTUnwrap(item.barVisibility[expecting: Bar.Content.self])
-				XCTAssertEqual(barContent.title, "Declarative UIKit Counter Demo")
-			}
+			let barContent = try XCTUnwrap(item.barVisibility[expecting: Bar.Content.self])
+			XCTAssertEqual(barContent.title, "Declarative UIKit Counter Demo")
+		}
 	}
 
 	func testRenderingIncrement() throws {
-		Counter.Workflow(demo: .swiftUI)
-			.renderTester()
-			.render { ($0.screen.wrappedScreen as? Counter.SwiftUI.Screen)?.increment() }
-			.assert(state: 1)
-			.assertNoOutput()
+		try Counter.Workflow(demo: .swiftUI).renderTester().render { item in
+			let screen = try XCTUnwrap(item.screen.wrappedScreen as? Counter.SwiftUI.Screen)
+			screen.increment()
+		}.assert(state: 1).assertNoOutput()
 	}
 
 	func testRenderingDecrement() throws {
-		Counter.Workflow(demo: .swiftUI)
-			.renderTester()
-			.render { ($0.screen.wrappedScreen as? Counter.SwiftUI.Screen)?.decrement() }
-			.assert(state: -1)
-			.assertNoOutput()
+		try Counter.Workflow(demo: .swiftUI).renderTester().render { item in
+			let screen = try XCTUnwrap(item.screen.wrappedScreen as? Counter.SwiftUI.Screen)
+			screen.decrement()
+		}.assert(state: -1).assertNoOutput()
 	}
 
 	func testRenderingReset() throws {
-		Counter.Workflow(demo: .swiftUI)
-			.renderTester()
-			.render { $0.barVisibility[expecting: Bar.Content.self]?.rightItem?.handler() }
-			.assert(action: Counter.Workflow.Action.reset)
-			.assertNoOutput()
+		try Counter.Workflow(demo: .swiftUI).renderTester().render { item in
+			let content = try XCTUnwrap(item.barVisibility[expecting: Bar.Content.self])
+			let rightItem = try XCTUnwrap(content.rightItem)
+			rightItem.handler()
+		}.assert(state: 0).assertNoOutput()
 	}
 
 	func testRenderingFinish() throws {
-		Counter.Workflow(demo: .swiftUI)
-			.renderTester()
-			.render { $0.barVisibility[expecting: Bar.Content.self]?.leftItem?.handler() }
-			.assert(action: Counter.Workflow.Action.finish)
-			.verifyOutput { XCTAssert($0 == ()) }
+		try Counter.Workflow(demo: .swiftUI).renderTester().render { item in
+			let content = try XCTUnwrap(item.barVisibility[expecting: Bar.Content.self])
+			let leftItem = try XCTUnwrap(content.leftItem)
+			leftItem.handler()
+		}.assert(
+			action: Counter.Workflow.Action.finish
+		).verifyOutput { output in
+			XCTAssert(output == ())
+		}
 	}
 }
 

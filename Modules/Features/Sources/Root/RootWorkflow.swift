@@ -15,12 +15,12 @@ public enum Root {}
 
 // MARK: -
 public extension Root {
-    struct Workflow<DemoService: LoadingSpec> where DemoService.DemoLoadingResult == Demo.LoadingResult {
-        private let demoService: DemoService
-        
-        public init(demoService: DemoService) {
-            self.demoService = demoService
-        }
+	struct Workflow<DemoService: LoadingSpec> where DemoService.DemoLoadingResult == Demo.LoadingResult {
+		private let demoService: DemoService
+
+		public init(demoService: DemoService) {
+			self.demoService = demoService
+		}
 	}
 }
 
@@ -40,10 +40,10 @@ extension Root.Workflow: Workflow {
 		state selectedDemo: Demo?,
 		context: RenderContext<Self>
 	) -> BackStack.Screen<AnyScreen> {
-		context.render { (sink: Sink<Action>) in
+		context.render { (_: Sink<Action>) in
 			.init(
 				items: [
-                    DemoList.Workflow(service: demoService)
+					DemoList.Workflow(service: demoService)
 						.mapOutput(Action.showCounterDemo)
 						.rendered(in: context),
 					selectedDemo

@@ -9,12 +9,12 @@ import enum Demo.Demo
 class DemoListScreenTests: XCTestCase {
 	func testScreen() {
 		let demo = Demo.swiftUI
-		var selectedDemo: Demo? = nil
+		var selectedDemo: Demo?
 
 		let screen = DemoList.Screen(
 			demos: Demo.allCases,
 			selectDemo: { selectedDemo = $0 },
-            canSelectDemo: { _ in true },
+			canSelectDemo: { _ in true },
 			isUpdatingDemos: false
 		)
 

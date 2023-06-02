@@ -17,7 +17,7 @@ struct MockDemoAPI: LoadingSpec {
 		self.duration = duration
 		self.result = result
 	}
-	
+
 	func loadDemos() async -> Demo.LoadingResult {
 		try! await Task.sleep(nanoseconds: UInt64(duration * TimeInterval(NSEC_PER_SEC)))
 		return result()
