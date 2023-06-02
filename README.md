@@ -1,6 +1,6 @@
 # Workflow Demo
 
-This project demonstrates how to use Square’s Workflow library to compose workflows that render screens that back the views in your application. It involves a simple counter app that leverages the same `Screen` and `Workflow` types to back identical looking UIs built using either SwiftUI, UIKit, or a hybrid “declarative UIKit” paradigm.
+This project demonstrates how to use Square’s [Workflow](https://github.com/square/workflow-swift) library to compose workflows that render screens that back the views in your application. It involves a simple counter app that leverages the same `Screen` and `Workflow` types to back identical looking UIs built using either SwiftUI, UIKit, or a hybrid “declarative UIKit” paradigm.
 
 * [Layers](#layers)
 * [Dependencies](#dependencies)
@@ -24,6 +24,12 @@ extension Counter {
         let increment: () -> Void
         let decrement: () -> Void
     }
+}
+
+extension Counter.Screen {
+    var valueText: String { "The value is \(value)" }
+    var incrementTitle: String { "+" }
+    var decrementTitle: String { "-" }
 }
 ```
 
@@ -103,7 +109,7 @@ extension Counter.Workflow: Workflow {
 }
 ```
 
-Enums are a natural fit to define a workflow's possible actions:
+Enums are a natural fit to define a workflow’s possible actions:
 
 ```swift
 extension Counter.Workflow {
@@ -115,7 +121,7 @@ extension Counter.Workflow {
 }
 ```
 
-They must conform to `WorkflowAction` by providing an associated `WorkflowType`, and a function that describes how one should update such a workflow’s state. This function is also responsible for returning an output if that action should complete the workflow, or `nil` if no such completion is triggered. In this example (not shown) a back button could trigger a `.finish` action which would output `()`; all other actions would have no output.
+They must conform to `WorkflowAction` by providing an associated `WorkflowType`, and a function that describes how one should update such a workflow’s state. This function is also responsible for returning an output if that action should complete the workflow, or `nil` if no such completion is triggered. In this example (not shown) a back button could trigger a `finish` action which would output `()`; all other actions would have no output.
 
 ```swift
 extension Counter.Workflow.Action: WorkflowAction {
@@ -141,9 +147,9 @@ While Workflow can be used out of the box without any of this project’s own de
 
 ### Ergo
 
-Ergo is a library that aims to simply Workflow and provides the UI-framework-specific libraries `ErgoSwiftUI` `ErgoUIKit`, and `ErgoDeclarativeUIKit`. Along with the main library, use the UI library/libraries that is/are appropriate for the UI framework(s) in your app. 
+[Ergo](https://github.com/square/workflow-swift) is a library that aims to simply Workflow and provides the UI-framework-specific libraries `ErgoSwiftUI` `ErgoUIKit`, and `ErgoDeclarativeUIKit`. Along with the main library, use the UI library/libraries that is/are appropriate for the UI framework(s) in your app. 
 
-When using Workflow, the views that comprise your user interface depend on a `Screen` type. Depending on which UI framework you are using, this dependency is established in `Ergo` by conforming your view type to a protocol inheriting `ScreenBacked`.
+When using Workflow, the views that comprise your user interface depend on a `Screen` type. Depending on which UI framework you are using, this dependency is established in Ergo by conforming your view type to a protocol inheriting `ScreenBacked`.
 
 ```swift
 protocol ScreenBacked {
@@ -180,7 +186,7 @@ protocol Updating: ScreenBacked {
 
 #### Declarative UIKit
 
-In Declarative UIKit, your view will conform to `LayoutProvider`, and must return a Layoutless `Layout` type given a screen.
+In Declarative UIKit, your view will conform to `LayoutProvider`, and must return a [Layoutless](https://github.com/DeclarativeHub/Layoutless) `Layout` type given a screen. See more on Declarative UIKit below.
 
 
 ```swift
@@ -203,19 +209,61 @@ enum State: CaseAccessible {
 }
 ```
 
-A `Worker` that has successfully completed its work and has successful output returns to the `.ready` state and reports its output back to the workflow in which it is running. A `Worker` can support either working to produce a singular `Output` when started with an `Input` (`(Input) -> AsyncStream<Output>`) or a continuous stream of `Output`s until it has finished (`(Input) -> AsyncStream<Output>`). Ergo uses `EnumKit` to facilitate access to this state.
+A `Worker` that has successfully completed its work and has successful output returns to the `ready` state and reports its output back to the workflow in which it is running. A `Worker` can support either working to produce a singular `Output` when started with an `Input` (`(Input) -> AsyncStream<Output>`) or a continuous stream of `Output`s until it has finished (`(Input) -> AsyncStream<Output>`). Ergo uses [EnumKit](https://github.com/gringoireDM/EnumKit) to facilitate access to this state.
+
+As an example, consider a worker in a `DemoList.Workflow` that works to update the list of demos shown. This workflow’s state would contain a `Worker<Void, Result<[Demo], Error>>` called  e.g. `updateWorker`. It requires no input to start updating the list, and outputs either an array of demos (if it succeeds) or an error (if it fails). An example implementation of this workflow’s `Action`’s `apply` method would be responsible for starting this worker from the `updateDemos` action. 
+
+```swift
+case .updateDemos:
+    state.updateWorker.start()
+```
+
+We’ll send this action when the user taps the navigation bar’s right bar button item. The worker must also be referenced in the workflow’s render function, along with the action to send if it succeeds. In this case, if the worker is successful, we should dispatch the `show` action to show the successfully loaded demos.
+
+```swift
+func render(
+    state: State,
+    context: RenderContext<Self>
+) -> BackStack.Item {
+    context.render { (sink: Sink<Action>) in
+        .init(
+            screen: DemoList.Screen(
+                demos: state.demos,
+                selectDemo: { sink.send(.demo($0)) },
+                canSelectDemo: { _ in canSelectDemos },
+                isUpdatingDemos: state.updateWorker.isWorking
+            ).asAnyScreen(),
+            barContent: .init(
+                rightItem: .init(
+                    content: .text("Update"),
+                    handler: { sink.send(.updateDemos) }
+                )
+            )
+        )
+    } running: {
+        state.updateWorker.mapSuccess(Action.show)
+    }
+}
+```
+
+Now, all our `Action`’s `apply` function has to do is update the state with demos returned in the `show` action:
+
+```swift
+case let .show(demos):
+    state.demos = demos
+```
 
 ### Inject
 
-While SwiftUI boasts live previewing, no such functionality is found out of the box in UIKit. To compensate, this project demonstrates using Inject support live previewing of UIKit views. WHen Inject is running, saving any changes to UI code will immediately cause the running app to reflect those changes. While not necessary to run the demo app, it can make for a reliable way to quickly iterate on your app’s user interface, especially combined with the modularization techniques shown below.
+While SwiftUI boasts live previewing (“hot reloading”), no such functionality is found out of the box in UIKit. To compensate, this project demonstrates using Inject support live previewing of UIKit views. When [Inject](https://github.com/krzysztofzablocki/Inject) is running, saving any changes to UI code will immediately cause the running app to reflect those changes. While not necessary to run the demo app, it can make for a reliable way to quickly iterate on your app’s user interface, especially combined with the modularization techniques shown below.
 
 ### Test Dependencies
 
-To exhaustively test all screen, workflow, and view code regardless of UI framework, this project makes use of swift-snapshot-testing, ViewInspector, and ErrorAssertions.
+To exhaustively test all screen, workflow, and view code regardless of UI framework, this project makes use of [swift-snapshot-testing](https://github.com/pointfreeco/swift-snapshot-testing), [ViewInspector](https://github.com/nalexn/ViewInspector), and [ErrorAssertions](https://github.com/SlaunchaMan/ErrorAssertions).
 
 ## Declarative UIKit
 
-As described above, this project also demonstrates a reimagining of UIKit that uses similar declarative principles as SwiftUI. For example, a `Counter.View` built with Declarative UIKit as opposed to SwiftUI would be the following, and is shown within the demo app:
+As described above, this project also demonstrates a reimagining of UIKit that uses similar declarative principles as SwiftUI. For example, a `Counter.View` built with Declarative UIKit as opposed to SwiftUI would be implemented as follows, and is shown within the demo app:
 
 ```swift
 extension Counter {
@@ -244,7 +292,34 @@ extension Counter.Screen: LayoutBackingScreen {
 }
 ```
 
-This makes use of `ErgoDeclarativeUIKit` and the Metric dependency, along with its Geometric and Telemetric submodules (in addition to Layoutless mentioned above). `ReactiveCocoa` and `ReactiveDataSources` power much of the declarative interface to UIKit elements.
+Refer also to the demo list view, which is implemented solely in Declarative UIKit. This choice provided a more concise and readable definition than even SwiftUI’s equivalent.
+
+```swift
+extension DemoList {
+    final class View: UIView {}
+}
+
+extension DemoList.View: LayoutProvider {
+    typealias Screen = DemoList.Screen
+
+    public func layout(with screen: some ScreenProxy<Screen>) -> AnyLayout {
+        UITableView.style(.insetGrouped).content(
+            items: screen.demos,
+            text: \.name,
+            loading: screen.isUpdatingDemos,
+            canSelectItem: screen.canSelectDemo.value
+        ).itemSelected(screen.selectDemo).fillingParent()
+    }
+}
+
+extension DemoList.Screen: LayoutBackingScreen {
+    typealias View = DemoList.View
+}
+```
+
+As defined above, the view consists of an inset grouped table view that displays rows with the names of the screen’s demos, or a row with a spinner if the screen is updating the demos. If a demo is selected (when possible as determined by the screen), the screen’s `selectDemo` closure is executed.
+
+These views make use of `ErgoDeclarativeUIKit` and the [Metric](https://github.com/Fleuronic/Metric) dependency, along with its [Geometric](https://github.com/Fleuronic/Geometric) and [Telemetric](https://github.com/Fleuronic/Telemetric) submodules (in addition to Layoutless mentioned above). [ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa) and [ReactiveDataSources](https://github.com/Fleuronic/ReactiveDataSources) power much of the declarative interface to UIKit elements.
 
 # Modularization
 
@@ -258,8 +333,8 @@ Our simple app relies on a single model type, representing one of the three demo
 
 ```swift
 enum Demo: Hashable {
-	case swiftUI
-	case uiKit(declarative: Bool)
+    case swiftUI
+    case uiKit(declarative: Bool)
 }
 ```
 
@@ -271,9 +346,9 @@ A service that simulates loading demos from a network. It provides a single spec
 
 ```swift
 protocol LoadingSpec {
-	associatedtype DemoLoadingResult
+    associatedtype DemoLoadingResult
 
-	func loadDemos() async -> DemoLoadingResult
+    func loadDemos() async -> DemoLoadingResult
 }
 ```
 
@@ -283,14 +358,14 @@ The main client provided in `DemoAPI` simply sleeps for a given time, then eithe
 
 ```swift
 extension API: LoadingSpec {
-	public func loadDemos() async -> Demo.LoadingResult {
-		do {
-			try await sleep(.updateTime)
-			return randomBool() ? .success(Demo.allCases) : .failure(.loadError)
-		} catch {
-			 return .failure(.sleepError(error))
-		}
-	}
+    public func loadDemos() async -> Demo.LoadingResult {
+        do {
+            try await sleep(.updateTime)
+            return randomBool() ? .success(Demo.allCases) : .failure(.loadError)
+        } catch {
+             return .failure(.sleepError(error))
+        }
+    }
 }
 ```
  
@@ -312,11 +387,11 @@ A feature (described above) that shows a number value which can be incremented a
 
 ## Apps
 
-To run an app, simply select the associated scheme and invoke Product > Run. To set an environment variable, edit the scheme and select the Arguments tab under Run. All relevant environment variables for each app are already added, but can be disabled or updated.
+Each feature module has a corresponding app to showcase its functionality. To run an app, simply select the associated scheme and invoke Product > Run. To set an environment variable, edit the scheme and select the Arguments tab under Run. All relevant environment variables for each app are already added, but can be disabled or updated.
 
 ### RootApp
 
-This is our “application.” Users are presented with a list of three demos: SwiftUI, UIKit, and Declarative UIKit. Selecting an item in the list will start a counter demo built with the associated UI framework. 
+**This is our “application.”** Users are presented with a list of three demos: SwiftUI, UIKit, and Declarative UIKit. This list can be updated. Selecting an item in the list will start a counter demo built with the associated UI framework. The back button then returns the user to the list of demos. 
 
 ### DemoListApp
 
@@ -324,12 +399,12 @@ An app to showcase the `DemoList` feature in isolation. As a result, the demos a
 
 #### Environment Variables
 
-- `canUpdateDemos`: Whether updating the demos succeeds. Optional an defaults to `true`.
-- `updateDuration`: How long in seconds it takes to update the demos. Optional and defaults to 1.
+- `canUpdateDemos`: Whether updating the demos succeeds. Optional, defaults to `true`.
+- `updateDuration`: How long in seconds it takes to update the demos. Optional, defaults to 1.
 
 ### CounterApp
 
-An app to showcase the `Counter` feature in isolation. As such, we are not coming from a `DemoList` in this app, the type of demo shown is indicated by an environment variable.
+An app to showcase the `Counter` feature in isolation. As such, we are not coming from a `DemoList` in this app, so the type of demo shown is indicated by an environment variable.
 
 #### Environment Variables
 
@@ -337,4 +412,4 @@ An app to showcase the `Counter` feature in isolation. As such, we are not comin
 
 ## Test Coverage
 
-Each module in this project comes with full unit test coverage. The developer can fully test a module by selecting its scheme and running the associated test plan. Feature modules provide unit tests for their screen, view, and workflow layers. Outside of the modules themselves, integration tests and snapshot tests are provided at the project level, and UI tests are provided for each app.
+Each module in this project comes with full unit test coverage. The developer can fully test a module by selecting its scheme and running the associated test plan. Feature modules provide unit tests for their screen, view, and workflow layers. Outside of the modules themselves, integration tests and snapshot tests are provided at the project level, and UI tests are provided for each app. See [Square’s tutorial](https://github.com/square/workflow-swift/blob/main/Samples/Tutorial/Tutorial5.md) to learn how to write unit tests and integration tests for your workflows and their actions.
