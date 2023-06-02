@@ -72,7 +72,7 @@ Finally, the `Counter.Workflow` type defines
 * How to update its internal state given an action
 * What to output upon an action that completes the workflow
 
-In other instances, the state may also include asynchronous workers, which have their own state and are typically can be started as the result of an action.
+(In many cases, the state may also include asynchronous workers, which have their own state and are typically can be started as the result of an action.)
 
 ```swift
 extension Counter {
@@ -244,8 +244,97 @@ extension Counter.Screen: LayoutBackingScreen {
 }
 ```
 
-This makes use of `ErgoDeclarativeUIKit` and the Metric dependency, along with its Geometric and Telemetric submodules (in addition to Layoutless mentioned above). `ReactiveCocoa` and `ReactiveDataSources` powers much of the declarative interface to UIKit elements.
+This makes use of `ErgoDeclarativeUIKit` and the Metric dependency, along with its Geometric and Telemetric submodules (in addition to Layoutless mentioned above). `ReactiveCocoa` and `ReactiveDataSources` power much of the declarative interface to UIKit elements.
 
 # Modularization
 
-# Test Coverage
+This project follows a modular architecture with a clear separation of concerns. Central to its  structure, then, is the top-level `Modules` directory, which itself is subdivided into the `Models`, `Services`, and `Features` modules. Each feature module has an associated app used to showcase that feature in isolation. The full application, then, is simply the `Root` feature’s app.
+
+## Models
+
+### Demo
+
+Our simple app relies on a single model type, representing one of the three demos it is capable of showing.
+
+```swift
+enum Demo: Hashable {
+	case swiftUI
+	case uiKit(declarative: Bool)
+}
+```
+
+## Services
+
+### DemoService
+
+A service that simulates loading demos from a network. It provides a single spec, `LoadingSpec`, that clients can adopt.
+
+```swift
+protocol LoadingSpec {
+	associatedtype DemoLoadingResult
+
+	func loadDemos() async -> DemoLoadingResult
+}
+```
+
+### DemoAPI
+
+The main client provided in `DemoAPI` simply sleeps for a given time, then either randomly returns the demos, or fails.
+
+```swift
+extension API: LoadingSpec {
+	public func loadDemos() async -> Demo.LoadingResult {
+		do {
+			try await sleep(.updateTime)
+			return randomBool() ? .success(Demo.allCases) : .failure(.loadError)
+		} catch {
+			 return .failure(.sleepError(error))
+		}
+	}
+}
+```
+ 
+For testing purposes, the `sleep` and `randomBool` closures can be injected upon initialization. 
+
+## Features
+
+### Root
+
+The root feature of the application, which synthesizes the `DemoList` and `Counter` features. Under this feature, selecting a demo in the `DemoList` feature will start the demo in the `Counter` feature. When the user is finished interacting with the demo, `Root` returns the user to the `DemoList` feature.
+
+### DemoList
+
+A feature that displays a list of `Demo`s, which can be “updated” using the `DemoService`.
+
+### Counter
+
+A feature (described above) that shows a number value which can be incremented and decremented.
+
+## Apps
+
+To run an app, simply select the associated scheme and invoke Product > Run. To set an environment variable, edit the scheme and select the Arguments tab under Run. All relevant environment variables for each app are already added, but can be disabled or updated.
+
+### RootApp
+
+This is our “application.” Users are presented with a list of three demos: SwiftUI, UIKit, and Declarative UIKit. Selecting an item in the list will start a counter demo built with the associated UI framework. 
+
+### DemoListApp
+
+An app to showcase the `DemoList` feature in isolation. As a result, the demos are not selectable, and their rows display no disclosure indicator. Users can however tap “Update” in the navigation bar to reload the list, which may fail.
+
+#### Environment Variables
+
+- `canUpdateDemos`: Whether updating the demos succeeds. Optional an defaults to `true`.
+- `updateDuration`: How long in seconds it takes to update the demos. Optional and defaults to 1.
+
+### CounterApp
+
+An app to showcase the `Counter` feature in isolation. As such, we are not coming from a `DemoList` in this app, the type of demo shown is indicated by an environment variable.
+
+#### Environment Variables
+
+- `demo`: The demo to launch into. One of `swiftUI`, `uiKit`, or `declarativeUIKit`. Required.
+
+## Test Coverage
+
+Each module in this project comes with full unit test coverage. The developer can fully test a module by selecting its scheme and running the associated test plan. Feature modules provide unit tests for their screen, view, and workflow layers. Outside of the modules themselves, integration tests and snapshot tests are provided at the project level, and UI tests are provided for each app.
