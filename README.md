@@ -11,7 +11,7 @@ This project demonstrates how to use Square’s [Workflow](https://github.com/sq
 
 ## Layers
 
-Applications built under this approach are best thought of having the layers **screen**, **view**, and **workflow** (SVW), as opposed to other layerings like MVC, MVVM, VIPER etc. All code in our application will fall  under one of (or be used by one or more of) these layers.
+Applications built under this approach are best thought of as having the layers **screen**, **view**, and **workflow** (SVW), as opposed to other layerings like MVC, MVVM, VIPER etc. All code in our application will fall under one of (or be used by one or more of) these layers.
 
 ### Screen
 
@@ -121,7 +121,7 @@ extension Counter.Workflow {
 }
 ```
 
-They must conform to `WorkflowAction` by providing an associated `WorkflowType`, and a function that describes how one should update such a workflow’s state. This function is also responsible for returning an output if that action should complete the workflow, or `nil` if no such completion is triggered. In this example (not shown) a back button could trigger a `finish` action which would output `()`; all other actions would have no output.
+They must conform to `WorkflowAction` by providing our workflow’s type as an associated `WorkflowType`, and a function that describes how one should update such a workflow’s state. This function is also responsible for returning an output if that action should complete the workflow, or `nil` if no such completion is triggered. In this example (not shown) a back button could trigger a `finish` action which would output `()`; all other actions would have no output.
 
 ```swift
 extension Counter.Workflow.Action: WorkflowAction {
@@ -255,7 +255,7 @@ case let .show(demos):
 
 ### Inject
 
-While SwiftUI boasts live previewing (“hot reloading”), no such functionality is found out of the box in UIKit. To compensate, this project demonstrates using Inject support live previewing of UIKit views. When [Inject](https://github.com/krzysztofzablocki/Inject) is running, saving any changes to UI code will immediately cause the running app to reflect those changes. While not necessary to run the demo app, it can make for a reliable way to quickly iterate on your app’s user interface, especially combined with the modularization techniques shown below.
+While SwiftUI boasts live previewing (“hot reloading”), no such functionality is found out of the box in UIKit. To compensate, this project demonstrates using [Inject](https://github.com/krzysztofzablocki/Inject) to support live previewing of UIKit views. When Inject is running, saving any changes to UI code will immediately cause the running app to reflect those changes. While not necessary to run the demo app, it can make for a reliable way to quickly iterate on your app’s user interface, especially combined with the modularization techniques shown below.
 
 ### Test Dependencies
 
@@ -293,7 +293,7 @@ extension Counter.Screen: LayoutBackingScreen {
 }
 ```
 
-Refer also to the demo list view, which is implemented solely in Declarative UIKit. This choice provided a more concise and readable definition than even SwiftUI’s equivalent.
+Refer also to the demo list view, which is implemented solely in Declarative UIKit. This choice provided a more concise and readable definition than even the SwiftUI equivalent.
 
 ```swift
 extension DemoList {
@@ -320,7 +320,7 @@ extension DemoList.Screen: LayoutBackingScreen {
 
 As defined above, the view consists of an inset grouped table view that displays rows with the names of the screen’s demos, or a row with a spinner if the screen is updating the demos. If a demo is selected (when possible as determined by the screen), the screen’s `selectDemo` closure is executed.
 
-These views make use of `ErgoDeclarativeUIKit` and the [Metric](https://github.com/Fleuronic/Metric) dependency, along with its [Geometric](https://github.com/Fleuronic/Geometric) and [Telemetric](https://github.com/Fleuronic/Telemetric) submodules (in addition to Layoutless mentioned above). [ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa) and [ReactiveDataSources](https://github.com/Fleuronic/ReactiveDataSources) power much of the declarative interface to UIKit elements.
+These views make use of `ErgoDeclarativeUIKit` and the [Metric](https://github.com/Fleuronic/Metric) dependency—along with its [Geometric](https://github.com/Fleuronic/Geometric) and [Telemetric](https://github.com/Fleuronic/Telemetric) submodules—in addition to Layoutless mentioned above. [ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa) and [ReactiveDataSources](https://github.com/Fleuronic/ReactiveDataSources) power much of the declarative interface to UIKit elements.
 
 ## Modules
 
