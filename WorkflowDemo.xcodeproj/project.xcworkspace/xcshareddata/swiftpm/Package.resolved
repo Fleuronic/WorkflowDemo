@@ -42,7 +42,7 @@
       "location" : "https://github.com/Fleuronic/ErgoSwiftUI",
       "state" : {
         "branch" : "main",
-        "revision" : "4b6ff3ab0f02cb2d7dbf0a16a5087962215918db"
+        "revision" : "439e8fb3bc774057f82e23e561d04094ed1c43d6"
       }
     },
     {
@@ -141,7 +141,7 @@
       "location" : "https://github.com/Fleuronic/Telemetric",
       "state" : {
         "branch" : "main",
-        "revision" : "64c2ad3241bb56a843d561494628244e75679bc6"
+        "revision" : "630080e00279a3b8e83e37592cd14fd84bfb78a0"
       }
     },
     {
