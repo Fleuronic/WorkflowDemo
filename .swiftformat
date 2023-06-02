@@ -2,6 +2,7 @@
 
 --disable blankLinesAroundMark
 --disable hoistPatternLet
+--disable initCoderUnavailable
 --disable sortedImports
 --disable trailingCommas
 --disable preferKeypath

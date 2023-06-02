@@ -13,15 +13,7 @@ public extension Counter {
 
 // MARK: -
 extension Counter.Screen {
-	var valueText: String {
-		"The value is \(value)"
-	}
-
-	var incrementTitle: String {
-		"+"
-	}
-
-	var decrementTitle: String {
-		"-"
-	}
+	var valueText: String { "The value is \(value)" }
+	var incrementTitle: String { "+" }
+	var decrementTitle: String { "-" }
 }
