@@ -5,7 +5,7 @@ This project demonstrates how to use Square’s [Workflow](https://github.com/sq
 * [Layers](#layers)
 * [Dependencies](#dependencies)
 * [Declarative UIKit](#declarative-uikit-header)
-* [Modules](#modularization)
+* [Modules](#modules)
 * [Apps](#apps)
 * [Test Coverage](#test-coverage)
 
@@ -261,7 +261,7 @@ While SwiftUI boasts live previewing (“hot reloading”), no such functionalit
 
 To exhaustively test all screen, workflow, and view code regardless of UI framework, this project makes use of [swift-snapshot-testing](https://github.com/pointfreeco/swift-snapshot-testing), [ViewInspector](https://github.com/nalexn/ViewInspector), and [ErrorAssertions](https://github.com/SlaunchaMan/ErrorAssertions).
 
-## Declarative UIKit [declarative-uikit-header]
+## Declarative UIKit [Declarative UIKit Header] ##
 
 As described above, this project also demonstrates a reimagining of UIKit that uses similar declarative principles as SwiftUI. For example, a `Counter.View` built with Declarative UIKit as opposed to SwiftUI would be implemented as follows, and is shown within the demo app:
 
@@ -321,13 +321,13 @@ As defined above, the view consists of an inset grouped table view that displays
 
 These views make use of `ErgoDeclarativeUIKit` and the [Metric](https://github.com/Fleuronic/Metric) dependency, along with its [Geometric](https://github.com/Fleuronic/Geometric) and [Telemetric](https://github.com/Fleuronic/Telemetric) submodules (in addition to Layoutless mentioned above). [ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa) and [ReactiveDataSources](https://github.com/Fleuronic/ReactiveDataSources) power much of the declarative interface to UIKit elements.
 
-# Modularization
+## Modules
 
 This project follows a modular architecture with a clear separation of concerns. Central to its  structure, then, is the top-level `Modules` directory, which itself is subdivided into the `Models`, `Services`, and `Features` modules. Each feature module has an associated app used to showcase that feature in isolation. The full application, then, is simply the `Root` feature’s app.
 
-## Models
+### Models
 
-### Demo
+#### Demo
 
 Our simple app relies on a single model type, representing one of the three demos it is capable of showing.
 
@@ -338,9 +338,9 @@ enum Demo: Hashable {
 }
 ```
 
-## Services
+### Services
 
-### DemoService
+#### DemoService
 
 A service that simulates loading demos from a network. It provides a single spec, `LoadingSpec`, that clients can adopt.
 
@@ -352,7 +352,7 @@ protocol LoadingSpec {
 }
 ```
 
-### DemoAPI
+#### DemoAPI
 
 The main client provided in `DemoAPI` simply sleeps for a given time, then either randomly returns the demos, or fails.
 
@@ -371,17 +371,17 @@ extension API: LoadingSpec {
  
 For testing purposes, the `sleep` and `randomBool` closures can be injected upon initialization. 
 
-## Features
+### Features
 
-### Root
+#### Root
 
 The root feature of the application, which synthesizes the `DemoList` and `Counter` features. Under this feature, selecting a demo in the `DemoList` feature will start the demo in the `Counter` feature. When the user is finished interacting with the demo, `Root` returns the user to the `DemoList` feature.
 
-### DemoList
+#### DemoList
 
 A feature that displays a list of `Demo`s, which can be “updated” using the `DemoService`.
 
-### Counter
+#### Counter
 
 A feature (described above) that shows a number value which can be incremented and decremented.
 
