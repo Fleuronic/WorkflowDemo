@@ -209,7 +209,7 @@ enum State: CaseAccessible {
 }
 ```
 
-A `Worker` that has successfully completed its work and has successful output returns to the `ready` state and reports its output back to the workflow in which it is running. A `Worker` can support either working to produce a singular `Output` when started with an `Input` (`(Input) -> AsyncStream<Output>`) or a continuous stream of `Output`s until it has finished (`(Input) -> AsyncStream<Output>`). Ergo uses [EnumKit](https://github.com/gringoireDM/EnumKit) to facilitate access to this state.
+A `Worker` that has successfully completed its work and has successful output returns to the `ready` state and reports its output back to the workflow in which it is running. A `Worker` can support either working to produce a singular `Output` when started with an `Input` (`(Input) -> async Output`) or a continuous stream of `Output`s until it has finished (`(Input) -> AsyncStream<Output>`). Ergo uses [EnumKit](https://github.com/gringoireDM/EnumKit) to facilitate access to this state.
 
 As an example, consider a worker in a `DemoList.Workflow` that works to update the list of demos shown. This workflow’s state would contain a `Worker<Void, Result<[Demo], Error>>` called  e.g. `updateWorker`. It requires no input to start updating the list, and outputs either an array of demos (if it succeeds) or an error (if it fails). An example implementation of this workflow’s `Action`’s `apply` method would be responsible for starting this worker from the `updateDemos` action. 
 
