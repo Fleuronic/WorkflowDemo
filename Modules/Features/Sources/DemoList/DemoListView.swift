@@ -9,7 +9,7 @@ import ErgoDeclarativeUIKit
 import enum Demo.Demo
 
 public extension DemoList {
-	class View: UIView {}
+	final class View: UIView {}
 }
 
 // MARK: -
