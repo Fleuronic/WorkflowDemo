@@ -147,7 +147,7 @@ While Workflow can be used out of the box without any of this project’s own de
 
 ### Ergo
 
-[Ergo](https://github.com/square/workflow-swift) is a library that aims to simply Workflow and provides the UI-framework-specific libraries `ErgoSwiftUI` `ErgoUIKit`, and `ErgoDeclarativeUIKit`. Along with the main library, use the UI library/libraries that is/are appropriate for the UI framework(s) in your app. 
+[Ergo](https://github.com/Fleuronic/Ergo) is a library that aims to simply Workflow and provides the UI-framework-specific libraries `ErgoSwiftUI` `ErgoUIKit`, and `ErgoDeclarativeUIKit`. Along with the main library, use the UI library/libraries that is/are appropriate for the UI framework(s) in your app. 
 
 When using Workflow, the views that comprise your user interface depend on a `Screen` type. Depending on which UI framework you are using, this dependency is established in Ergo by conforming your view type to a protocol inheriting `ScreenBacked`.
 
