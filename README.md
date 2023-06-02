@@ -1,4 +1,4 @@
-# WorkflowDemo
+# Workflow Demo
 
 This project demonstrates how to use Square’s Workflow library to compose workflows that render screens that back the views in your application. It involves a simple counter app that leverages the same `Screen` and `Workflow` types to back identical looking UIs built using either SwiftUI, UIKit, or a hybrid “declarative UIKit” paradigm.
 
