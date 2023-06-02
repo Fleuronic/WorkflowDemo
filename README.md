@@ -86,7 +86,11 @@ extension Counter {
 }
 ```
 
-We can define the workflow incrementally, first by conforming to the `Workflow` protocol. This requires that we provide an `Output` type: `Void` in this case, since we don't care what the workflow outputs upon completion, only that it has completed. It also needs an initial state and type, in this case the `Int` `0` (the initial value shown by the counter). Finally, it needs to know what to render given its current state and a render context. Here, this rendering is a `Counter.Screen` as defined above; the workflow uses its current state for the screen’s `value` property, and closures that send `Action`s (defined below) to a sink belonging to the workflow. A new rendering will be created, and hence the view backed by such a screen will be updated each time the workflow’s state updates.
+We can define the workflow incrementally, first by conforming to the `Workflow` protocol. This requires that we provide an `Output` type: `Void` in this case, since we don't care what the workflow outputs upon completion, only that it has completed.
+
+It also needs an initial state and type, in this case the `Int` `0` (the initial value shown by the counter).
+
+Finally, it needs to know what to render given its current state and a render context. Here, this rendering is a `Counter.Screen` as defined above; the workflow uses its current state for the screen’s `value` property, and closures that send `Action`s (defined below) to a sink belonging to the workflow. A new rendering will be created, and hence the view backed by such a screen will be updated each time the workflow’s state updates.
 
 ```swift
 extension Counter.Workflow: Workflow {
