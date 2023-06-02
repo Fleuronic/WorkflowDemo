@@ -113,6 +113,8 @@ extension Counter.Workflow: Workflow {
 }
 ```
 
+#### Workflow Actions
+
 Enums are a natural fit to define a workflow’s possible actions:
 
 ```swift
