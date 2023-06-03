@@ -330,7 +330,9 @@ These views make use of `ErgoDeclarativeUIKit` and the [Metric](https://github.c
 
 ## Modules
 
-This project follows a modular architecture with a clear separation of concerns. Central to its  structure is the top-level `Modules` directory, which itself is subdivided into the `Models`, `Services`, and `Features` modules. Each feature module has an associated app used to showcase that feature in isolation. The full application, then, is simply the `Root` feature’s app. Crucially, the `Root` feature’s child features, `DemoList` and `Counter`, have no knowledge of each other and, as their respective apps show, can exist in isolation—it is the responsibility of the parent feature, and only the parent feature, to detemermine the interaction between its child features.
+This project follows a modular architecture with a clear separation of concerns. Central to its  structure is the top-level `Modules` directory, which itself is subdivided into the `Models`, `Services`, and `Features` modules. Each feature module has an associated app used to showcase that feature in isolation. The full application, then, is simply the `Root` feature’s app.
+
+Crucially, the `Root` feature’s child features, `DemoList` and `Counter`, have no knowledge of each other and, as their respective apps show, can exist in isolation—it is the responsibility of the parent feature, and only the parent feature, to detemermine the interaction between its child features.
 
 ### Models
 
