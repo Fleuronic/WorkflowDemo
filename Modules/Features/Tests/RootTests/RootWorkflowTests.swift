@@ -24,10 +24,8 @@ final class RootWorkflowTests: XCTestCase {
 	}
 
 	func testShowDemoList() {
-		let demo = Demo.swiftUI
-
 		Root.Workflow<API>.Action
-			.tester(withState: demo)
+			.tester(withState: .swiftUI)
 			.send(action: .showDemoList)
 			.assert(state: nil)
 			.assertNoOutput()
@@ -73,10 +71,8 @@ final class RootWorkflowTests: XCTestCase {
 	}
 
 	func testSwiftUICounterRendering() throws {
-		let demo = Demo.swiftUI
-
 		try Root.Workflow(demoService: API()).renderTester(
-			initialState: demo
+			initialState: .swiftUI
 		).expectWorkflow(
 			type: DemoList.Workflow<API>.self,
 			producingRendering: .init(
@@ -105,10 +101,8 @@ final class RootWorkflowTests: XCTestCase {
 	}
 
 	func testUIKitCounterRendering() throws {
-		let demo = Demo.uiKit(declarative: false)
-
 		try Root.Workflow(demoService: API()).renderTester(
-			initialState: demo
+			initialState: .uiKit(declarative: false)
 		).expectWorkflow(
 			type: DemoList.Workflow<API>.self,
 			producingRendering: .init(
@@ -137,10 +131,8 @@ final class RootWorkflowTests: XCTestCase {
 	}
 
 	func testDeclarativeUIKitCounterRendering() throws {
-		let demo = Demo.uiKit(declarative: true)
-
 		try Root.Workflow(demoService: API()).renderTester(
-			initialState: demo
+			initialState: .uiKit(declarative: true)
 		).expectWorkflow(
 			type: DemoList.Workflow<API>.self,
 			producingRendering: .init(
@@ -169,10 +161,8 @@ final class RootWorkflowTests: XCTestCase {
 	}
 
 	func testCounterRenderingShowDemoList() throws {
-		let demo = Demo.swiftUI
-
 		Root.Workflow(demoService: API()).renderTester(
-			initialState: demo
+			initialState: .swiftUI
 		).expectWorkflow(
 			type: DemoList.Workflow<API>.self,
 			producingRendering: .init(
