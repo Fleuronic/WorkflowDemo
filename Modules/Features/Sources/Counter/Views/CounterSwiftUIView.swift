@@ -15,7 +15,7 @@ extension Counter.SwiftUI.View: BodyProvider {
 	public typealias Screen = Counter.SwiftUI.Screen
 
 	// MARK: BodyProvider
-	public func body(with screen: Screen) -> some View {
+	public static func body(with screen: Screen) -> some View {
 		VStack {
 			Text(screen.valueText)
 			Button(action: screen.increment) {

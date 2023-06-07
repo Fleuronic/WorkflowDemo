@@ -24,7 +24,7 @@
       "location" : "https://github.com/Fleuronic/Ergo",
       "state" : {
         "branch" : "main",
-        "revision" : "73055dde79a60d79a400624dd263bc54a19e913a"
+        "revision" : "8a209bc22e1cfcfcde37a8e5ac51a2f56ac49bb8"
       }
     },
     {
@@ -42,7 +42,7 @@
       "location" : "https://github.com/Fleuronic/ErgoSwiftUI",
       "state" : {
         "branch" : "main",
-        "revision" : "439e8fb3bc774057f82e23e561d04094ed1c43d6"
+        "revision" : "42c44bc6287561989860046cebe4f3d33567328f"
       }
     },
     {
@@ -96,7 +96,7 @@
       "location" : "https://github.com/Fleuronic/Metric",
       "state" : {
         "branch" : "main",
-        "revision" : "34a6b5646ae7c131157efc2ecd0f2f1ee63e61a8"
+        "revision" : "0eb751f2c591d48e0d86b300fad1858c1fe02122"
       }
     },
     {

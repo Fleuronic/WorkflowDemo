@@ -22,7 +22,7 @@ final class CounterViewTests: XCTestCase {
 			)
 		)
 
-		let body = Counter.SwiftUI.View().body(with: screen)
+		let body = Counter.SwiftUI.View.body(with: screen)
 		let stack = try body.inspect().vStack()
 		let valueText = try stack.text(0)
 		let incrementButton = try stack.button(1)
