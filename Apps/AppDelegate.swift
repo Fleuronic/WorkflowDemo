@@ -16,12 +16,14 @@ extension AppDelegate {
 		let window = UIWindow(frame: UIScreen.main.bounds)
 		window.makeKeyAndVisible()
 		window.rootViewController = .init()
+
 		Task {
 			let workflow = await self.workflow
 			await MainActor.run {
 				window.rootViewController = WorkflowHostingController(workflow: workflow)
 			}
 		}
+
 		return window
 	}
 }
