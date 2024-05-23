@@ -10,9 +10,9 @@ public extension Demo {
 	var name: String {
 		switch self {
 		case .swiftUI:
-			return "SwiftUI"
+			"SwiftUI"
 		case let .uiKit(declarative):
-			return declarative ? "Declarative UIKit" : "UIKit"
+			declarative ? "Declarative UIKit" : "UIKit"
 		}
 	}
 }

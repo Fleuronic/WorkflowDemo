@@ -108,9 +108,9 @@ private extension DemoList.Workflow.State {
 			message: {
 				switch error {
 				case .loadError:
-					return "The demos could not be updated. Please try again later."
+					"The demos could not be updated. Please try again later."
 				case let .sleepError(error):
-					return error.localizedDescription
+					error.localizedDescription
 				}
 			}(),
 			actions: [
