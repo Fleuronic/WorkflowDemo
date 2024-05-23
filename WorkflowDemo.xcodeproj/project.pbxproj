@@ -1177,6 +1177,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XDAMV22DTA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Apps/Demo List App/Resources/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Demo List App";
@@ -1210,6 +1211,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XDAMV22DTA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Apps/Demo List App/Resources/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Demo List App";
@@ -1243,6 +1245,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XDAMV22DTA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Apps/Counter App/Resources/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Counter App";
@@ -1276,6 +1279,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XDAMV22DTA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Apps/Counter App/Resources/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Counter App";
