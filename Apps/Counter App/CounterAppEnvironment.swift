@@ -8,11 +8,11 @@ import enum Counter.Counter
 extension Counter.App {
 	@propertyWrapper struct Environment {
 		private let key: Key
-
+		
 		init(_ key: Key) {
 			self.key = key
 		}
-
+		
 		var wrappedValue: Demo {
 			ProcessInfo.processInfo
 				.environment[key.rawValue]

@@ -18,14 +18,14 @@ public extension Counter {
 				fromSource: true
 			)
 		}
-
+		
 		public init(
 			demo: Demo,
 			fromSource: Bool
 		) {
 			self.demo = demo
 			self.fromSource = fromSource
-
+			
 			switch demo {
 			case .swiftUI:
 				screenWrapper = Counter.SwiftUI.Screen.wrap

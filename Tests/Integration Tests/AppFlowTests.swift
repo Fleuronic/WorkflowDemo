@@ -23,22 +23,22 @@ final class AppFlowTests: XCTestCase {
 	func testAppFlow() throws {
 		// Start at Demo List
 		try verifyShowing(Alert.Screen<DemoList.Screen>.self)
-
+		
 		// Show SwiftUI Counter Demo
 		try select(.swiftUI)
 		try verifyShowing(Counter.SwiftUI.Screen.self)
 		try finishDemo()
-
+		
 		// Show UIKit Counter Demo
 		try select(.uiKit(declarative: false))
 		try verifyShowing(Counter.UIKit.Screen.self)
 		try finishDemo()
-
+		
 		// Show DeclarativeUIKit Counter Demo
 		try select(.uiKit(declarative: true))
 		try verifyShowing(Counter.DeclarativeUIKit.Screen.self)
 		try finishDemo()
-
+		
 		// Finish at Demo List
 		try verifyShowing(Alert.Screen<DemoList.Screen>.self)
 	}
@@ -66,7 +66,7 @@ private extension AppFlowTests {
 		let item = try XCTUnwrap(screen.items.last)
 		let barContent = try XCTUnwrap(item.barVisibility[expecting: Bar.Content.self])
 		let backButton = try XCTUnwrap(barContent.leftItem)
-
+		
 		backButton.handler()
 	}
 }

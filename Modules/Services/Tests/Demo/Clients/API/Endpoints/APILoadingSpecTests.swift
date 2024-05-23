@@ -18,7 +18,7 @@ final class APILoadingSpecTests: XCTestCase {
 			sleep: { _ in },
 			randomBool: { true }
 		)
-
+		
 		let demos = try await api.loadDemos().get()
 		XCTAssertEqual(demos, Demo.allCases)
 	}
@@ -28,7 +28,7 @@ final class APILoadingSpecTests: XCTestCase {
 			sleep: { _ in },
 			randomBool: { false }
 		)
-
+		
 		let result = await api.loadDemos()
 		switch result {
 		case .failure(.loadError):
@@ -43,12 +43,12 @@ final class APILoadingSpecTests: XCTestCase {
 			domain: "DemoAPI.API.Error",
 			code: 0
 		)
-
+		
 		let api = API(
 			sleep: { _ in throw API.Error.sleepError(underlyingError) },
 			randomBool: { true }
 		)
-
+		
 		switch await api.loadDemos() {
 		case let .failure(.sleepError(error as NSError)):
 			XCTAssertEqual(error, underlyingError)

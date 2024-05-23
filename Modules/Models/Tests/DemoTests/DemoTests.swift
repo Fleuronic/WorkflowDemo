@@ -17,7 +17,7 @@ final class DemoTests: XCTestCase {
 			.uiKit(declarative: false),
 			.uiKit(declarative: true)
 		]
-
+		
 		XCTAssertEqual(Demo.allCases, demos)
 	}
 

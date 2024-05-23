@@ -21,17 +21,17 @@ final class CounterViewTests: XCTestCase {
 				decrement: decrementExpectation.fulfill
 			)
 		)
-
+		
 		let body = Counter.SwiftUI.View.body(with: screen)
 		let stack = try body.inspect().vStack()
 		let valueText = try stack.text(0)
 		let incrementButton = try stack.button(1)
 		let decrementButton = try stack.button(2)
-
+		
 		try XCTAssertEqual(valueText.string(), screen.valueText)
 		try XCTAssertEqual(incrementButton.labelView().text().string(), screen.incrementTitle)
 		try XCTAssertEqual(decrementButton.labelView().text().string(), screen.decrementTitle)
-
+		
 		try incrementButton.tap()
 		try decrementButton.tap()
 		wait(for: [incrementExpectation, decrementExpectation], enforceOrder: true)
@@ -47,23 +47,23 @@ final class CounterViewTests: XCTestCase {
 				decrement: decrementExpectation.fulfill
 			)
 		)
-
+		
 		let view = Counter.UIKit.View(screen: screen)
 		view.update(with: screen)
-
+		
 		let stackView = try view.stackView()
 		let valueLabel = try stackView.label(0)
 		let incrementButton = try stackView.button(1)
 		let decrementButton = try stackView.button(2)
-
+		
 		XCTAssertEqual(valueLabel.text, screen.valueText)
 		XCTAssertEqual(incrementButton.title(for: .normal), screen.incrementTitle)
 		XCTAssertEqual(decrementButton.title(for: .normal), screen.decrementTitle)
-
+		
 		incrementButton.tap()
 		decrementButton.tap()
 		wait(for: [incrementExpectation, decrementExpectation], enforceOrder: true)
-
+		
 		expectFatalError { _ = Counter.UIKit.View(coder: .init()) }
 	}
 
@@ -81,19 +81,19 @@ final class CounterViewTests: XCTestCase {
 			screen: screen,
 			environment: .empty
 		)
-
+		
 		let view = Counter.DeclarativeUIKit.View()
 		view.layout(with: viewController).layout(in: view)
-
+		
 		let stackView = try view.stackView()
 		let valueLabel = try stackView.label(0)
 		let incrementButton = try stackView.button(1)
 		let decrementButton = try stackView.button(2)
-
+		
 		XCTAssertEqual(valueLabel.text, screen.valueText)
 		XCTAssertEqual(incrementButton.title(for: .normal), screen.incrementTitle)
 		XCTAssertEqual(decrementButton.title(for: .normal), screen.decrementTitle)
-
+		
 		incrementButton.invokeAction()
 		decrementButton.invokeAction()
 		wait(for: [incrementExpectation, decrementExpectation], enforceOrder: true)

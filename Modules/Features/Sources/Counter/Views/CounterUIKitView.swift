@@ -12,10 +12,10 @@ public extension Counter.UIKit {
 		private let decrementButton: UIButton
 		private let increment: () -> Void
 		private let decrement: () -> Void
-
+		
 		// MARK: NSCoding
 		required init(coder: NSCoder) { fatalError() }
-
+		
 		// MARK: Updating
 		public init(screen: Screen) {
 			valueLabel = .init()
@@ -24,12 +24,12 @@ public extension Counter.UIKit {
 			stackView = .init(arrangedSubviews: [valueLabel, incrementButton, decrementButton])
 			increment = screen.increment
 			decrement = screen.decrement
-
+			
 			super.init(frame: .zero)
-
+			
 			incrementButton.addTarget(self, action: #selector(incrementButtonTapped), for: .touchUpInside)
 			decrementButton.addTarget(self, action: #selector(decrementButtonTapped), for: .touchUpInside)
-
+			
 			addSubview(stackView)
 			stackView.axis = .vertical
 			stackView.translatesAutoresizingMaskIntoConstraints = false

@@ -15,7 +15,7 @@ import struct DemoAPI.API
 final class RootWorkflowTests: XCTestCase {
 	func testShowCounterDemo() {
 		let demo = Demo.swiftUI
-
+		
 		Root.Workflow<API>.Action
 			.tester(withState: nil)
 			.send(action: .showCounterDemo(demo))

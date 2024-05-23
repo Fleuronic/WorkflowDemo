@@ -43,7 +43,7 @@ private extension DemoList.App.Delegate {
 	var mockAPI: MockDemoAPI {
 		let canUpdateDemos = self.canUpdateDemos.map { $0 == "true" } ?? true
 		let updateDuration = self.updateDuration.flatMap(TimeInterval.init) ?? 1
-
+		
 		return .init(
 			duration: updateDuration,
 			result: canUpdateDemos ? .success(Demo.allCases) : .failure(.loadError)

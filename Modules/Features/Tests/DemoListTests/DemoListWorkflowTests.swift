@@ -16,7 +16,7 @@ import protocol DemoService.LoadingSpec
 final class DemoListWorkflowTests: XCTestCase {
 	func testDemo() {
 		let demo = Demo.swiftUI
-
+		
 		DemoList.Workflow.Action.tester(
 			withState: DemoList.Workflow(
 				service: MockDemoAPI(
@@ -34,7 +34,7 @@ final class DemoListWorkflowTests: XCTestCase {
 		let demos = Demo.allCases
 		let api = MockDemoAPI(result: .success(demos))
 		let updateDemos = api.loadDemos
-
+		
 		DemoList.Workflow.Action.tester(
 			withState: DemoList.Workflow(
 				service: api
@@ -44,7 +44,7 @@ final class DemoListWorkflowTests: XCTestCase {
 		).verifyState { state in
 			XCTAssertEqual(state.demos, demos)
 		}.assertNoOutput()
-
+		
 		DemoList.Workflow<MockDemoAPI>.Action.tester(
 			withState: .init(
 				demos: demos,
@@ -72,7 +72,7 @@ final class DemoListWorkflowTests: XCTestCase {
 	func testRenderingScreen() throws {
 		let demos = Demo.allCases
 		let canSelectDemo = true
-
+		
 		try DemoList.Workflow(
 			service: MockDemoAPI(
 				result: .success(demos)
@@ -86,7 +86,7 @@ final class DemoListWorkflowTests: XCTestCase {
 			let screen = alertScreen.baseScreen
 			XCTAssertEqual(screen.demos, demos)
 			XCTAssertTrue(screen.demos.map(screen.canSelectDemo).allSatisfy { $0 == canSelectDemo })
-
+			
 			let barContent = try XCTUnwrap(item.barVisibility[expecting: Bar.Content.self])
 			XCTAssertEqual(barContent.title, "Workflow Demo")
 		}.verifyState { state in
@@ -99,7 +99,7 @@ final class DemoListWorkflowTests: XCTestCase {
 		let api = MockDemoAPI(result: .success(Demo.allCases))
 		let workflow = DemoList.Workflow(service: api)
 		let updateDemos = api.loadDemos
-
+		
 		try workflow.renderTester().expectWorkflow(
 			type: WorkerWorkflow<DemoList.Workflow<MockDemoAPI>.UpdateWorker>.self,
 			producingRendering: ()
@@ -111,7 +111,7 @@ final class DemoListWorkflowTests: XCTestCase {
 		}.assert(
 			action: DemoList.Workflow.Action.updateDemos
 		).assertNoOutput()
-
+		
 		try workflow.renderTester(
 			initialState: .init(
 				demos: Demo.allCases,
@@ -129,7 +129,7 @@ final class DemoListWorkflowTests: XCTestCase {
 
 	func testRenderingSelectDemo() throws {
 		let demo = Demo.swiftUI
-
+		
 		try DemoList.Workflow(
 			service: MockDemoAPI(
 				result: .success(Demo.allCases)
@@ -151,7 +151,7 @@ final class DemoListWorkflowTests: XCTestCase {
 
 	func testRenderingCanSelectDemo() throws {
 		let demo = Demo.swiftUI
-
+		
 		try DemoList.Workflow(
 			service: MockDemoAPI(
 				result: .success(Demo.allCases)
@@ -175,7 +175,7 @@ final class DemoListWorkflowTests: XCTestCase {
 		let error = Demo.LoadingResult.Error.loadError
 		let api = MockDemoAPI(result: .failure(error))
 		let updateDemos = api.loadDemos
-
+		
 		try DemoList.Workflow(service: api).renderTester(
 			initialState: .init(
 				demos: Demo.allCases,
@@ -193,7 +193,7 @@ final class DemoListWorkflowTests: XCTestCase {
 			let alert = try XCTUnwrap(alertScreen.alert)
 			XCTAssertEqual(alert.title, "Update Error")
 			XCTAssertEqual(alert.message, "The demos could not be updated. Please try again later.")
-
+			
 			let dismissAction = try XCTUnwrap(alert.actions.first)
 			XCTAssertEqual(dismissAction.title, "Dismiss")
 			dismissAction.handler()
@@ -211,11 +211,11 @@ final class DemoListWorkflowTests: XCTestCase {
 				NSLocalizedDescriptionKey: sleepErrorMessage
 			]
 		)
-
+		
 		let error = Demo.LoadingResult.Error.sleepError(underlyingError)
 		let api = MockDemoAPI(result: .failure(error))
 		let updateDemos = api.loadDemos
-
+		
 		try DemoList.Workflow(service: api).renderTester(
 			initialState: .init(
 				demos: Demo.allCases,
@@ -233,7 +233,7 @@ final class DemoListWorkflowTests: XCTestCase {
 			let alert = try XCTUnwrap(alertScreen.alert)
 			XCTAssertEqual(alert.title, "Update Error")
 			XCTAssertEqual(alert.message, sleepErrorMessage)
-
+			
 			let dismissAction = try XCTUnwrap(alert.actions.first)
 			XCTAssertEqual(dismissAction.title, "Dismiss")
 			dismissAction.handler()
@@ -248,7 +248,7 @@ final class DemoListWorkflowTests: XCTestCase {
 		let updateDemos = api.loadDemos
 		let expectation = expectation(description: "UpdateDemos")
 		let worker = DemoList.Workflow<MockDemoAPI>.UpdateWorker.working(to: updateDemos)
-
+		
 		worker.run().startWithValues { result in
 			switch result {
 			case .success(Demo.allCases):
@@ -257,7 +257,7 @@ final class DemoListWorkflowTests: XCTestCase {
 				break
 			}
 		}
-
+		
 		wait(for: [expectation])
 	}
 
@@ -267,7 +267,7 @@ final class DemoListWorkflowTests: XCTestCase {
 		let updateDemos = api.loadDemos
 		let expectation = expectation(description: "UpdateDemos")
 		let worker = DemoList.Workflow<MockDemoAPI>.UpdateWorker.working(to: updateDemos)
-
+		
 		worker.run().startWithValues { result in
 			switch result {
 			case .failure(.loadError):
@@ -276,7 +276,7 @@ final class DemoListWorkflowTests: XCTestCase {
 				break
 			}
 		}
-
+		
 		wait(for: [expectation])
 	}
 
@@ -286,7 +286,7 @@ final class DemoListWorkflowTests: XCTestCase {
 		let updateDemos = api.loadDemos
 		let expectation = expectation(description: "UpdateDemos")
 		let worker = DemoList.Workflow<MockDemoAPI>.UpdateWorker.working(to: updateDemos)
-
+		
 		worker.run().startWithValues { value in
 			switch value {
 			case result:
@@ -295,7 +295,7 @@ final class DemoListWorkflowTests: XCTestCase {
 				break
 			}
 		}
-
+		
 		wait(for: [expectation])
 	}
 }

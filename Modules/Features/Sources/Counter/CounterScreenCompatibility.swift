@@ -13,11 +13,11 @@ public extension Counter.SwiftUI {
 	@dynamicMemberLookup
 	struct Screen: WrappedScreen {
 		private let screen: Counter.Screen
-
+		
 		public init(screen: Counter.Screen) {
 			self.screen = screen
 		}
-
+		
 		subscript<Value>(dynamicMember keyPath: KeyPath<Counter.Screen, Value>) -> Value {
 			screen[keyPath: keyPath]
 		}
@@ -29,11 +29,11 @@ public extension Counter.UIKit {
 	@dynamicMemberLookup
 	struct Screen: WrappedScreen {
 		private let screen: Counter.Screen
-
+		
 		public init(screen: Counter.Screen) {
 			self.screen = screen
 		}
-
+		
 		subscript<Value>(dynamicMember keyPath: KeyPath<Counter.Screen, Value>) -> Value {
 			screen[keyPath: keyPath]
 		}
@@ -45,11 +45,11 @@ public extension Counter.DeclarativeUIKit {
 	@dynamicMemberLookup
 	struct Screen: WrappedScreen {
 		private let screen: Counter.Screen
-
+		
 		public init(screen: Counter.Screen) {
 			self.screen = screen
 		}
-
+		
 		subscript<Value>(dynamicMember keyPath: KeyPath<Counter.Screen, Value>) -> Value {
 			screen[keyPath: keyPath]
 		}

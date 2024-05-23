@@ -13,14 +13,14 @@ public extension DemoList {
 	struct Workflow<Service: LoadingSpec> where Service.DemoLoadingResult == Demo.LoadingResult {
 		private let service: Service
 		private let canSelectDemos: Bool
-
+		
 		public init(service: Service) {
 			self.init(
 				service: service,
 				canSelectDemos: true
 			)
 		}
-
+		
 		public init(
 			service: Service,
 			canSelectDemos: Bool

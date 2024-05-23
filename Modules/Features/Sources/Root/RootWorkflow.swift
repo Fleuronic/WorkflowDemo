@@ -17,7 +17,7 @@ public enum Root {}
 public extension Root {
 	struct Workflow<DemoService: LoadingSpec> where DemoService.DemoLoadingResult == Demo.LoadingResult {
 		private let demoService: DemoService
-
+		
 		public init(demoService: DemoService) {
 			self.demoService = demoService
 		}
