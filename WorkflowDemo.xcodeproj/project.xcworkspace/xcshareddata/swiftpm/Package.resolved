@@ -24,7 +24,7 @@
       "location" : "https://github.com/Fleuronic/Ergo",
       "state" : {
         "branch" : "main",
-        "revision" : "8a209bc22e1cfcfcde37a8e5ac51a2f56ac49bb8"
+        "revision" : "72f653c61b009f1e88c61fda6db8a0ed4e6bfe67"
       }
     },
     {
@@ -33,7 +33,7 @@
       "location" : "https://github.com/Fleuronic/ErgoDeclarativeUIKit",
       "state" : {
         "branch" : "main",
-        "revision" : "2f286bd5ecf4835cdf13b0736056888ec3990039"
+        "revision" : "73e67f51a5b07df5f62066c48c2860570c08ca20"
       }
     },
     {
@@ -42,7 +42,7 @@
       "location" : "https://github.com/Fleuronic/ErgoSwiftUI",
       "state" : {
         "branch" : "main",
-        "revision" : "42c44bc6287561989860046cebe4f3d33567328f"
+        "revision" : "5827af139396e844991f91534f31f751887ce4e5"
       }
     },
     {
@@ -51,7 +51,7 @@
       "location" : "https://github.com/Fleuronic/ErgoUIKit",
       "state" : {
         "branch" : "main",
-        "revision" : "75ff472831941f68483533cb2e5580b468711797"
+        "revision" : "092188eac94f33363a2e468cbb65b59485d7c5bd"
       }
     },
     {
@@ -69,7 +69,7 @@
       "location" : "https://github.com/Fleuronic/Geometric",
       "state" : {
         "branch" : "main",
-        "revision" : "22c55a44fd68e2dd00ea7ad62bce68ed4d06003f"
+        "revision" : "d8a2cd9cfa9a1bf1e307959f16c9f298c359d042"
       }
     },
     {
@@ -96,7 +96,7 @@
       "location" : "https://github.com/Fleuronic/Metric",
       "state" : {
         "branch" : "main",
-        "revision" : "0eb751f2c591d48e0d86b300fad1858c1fe02122"
+        "revision" : "a6359475ca5d3bdea880780593d1c74f5c4833e7"
       }
     },
     {
@@ -114,7 +114,7 @@
       "location" : "https://github.com/Fleuronic/ReactiveDataSources",
       "state" : {
         "branch" : "master",
-        "revision" : "618c79932ea0476e2a926dba480b9f96e3c70159"
+        "revision" : "4a475d088786ef2a53feab4f9a8351a6614ec592"
       }
     },
     {
@@ -122,8 +122,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveCocoa/ReactiveSwift.git",
       "state" : {
-        "branch" : "swift-concurrency",
-        "revision" : "3d40187c982346352d0adbe6b38e0e3d53fddc95"
+        "revision" : "40c465af19b993344e84355c00669ba2022ca3cd",
+        "version" : "7.1.1"
       }
     },
     {
@@ -131,8 +131,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-snapshot-testing",
       "state" : {
-        "revision" : "cef5b3f6f11781dd4591bdd1dd0a3d22bd609334",
-        "version" : "1.11.0"
+        "revision" : "625ccca8570773dd84a34ee51a81aa2bc5a4f97a",
+        "version" : "1.16.0"
+      }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-syntax",
+      "state" : {
+        "revision" : "303e5c5c36d6a558407d364878df131c3546fad8",
+        "version" : "510.0.2"
       }
     },
     {
@@ -141,7 +150,7 @@
       "location" : "https://github.com/Fleuronic/Telemetric",
       "state" : {
         "branch" : "main",
-        "revision" : "630080e00279a3b8e83e37592cd14fd84bfb78a0"
+        "revision" : "f4a906ddf49f428be5c309bcdda57262bc1265f3"
       }
     },
     {
@@ -150,7 +159,7 @@
       "location" : "https://github.com/nalexn/ViewInspector",
       "state" : {
         "branch" : "0.9.7",
-        "revision" : "e42529aa0b6ff57393ab52540f6006f3a709ee00"
+        "revision" : "f8a994374b9eff1d92046f3d759654f527495045"
       }
     },
     {
@@ -159,7 +168,7 @@
       "location" : "https://github.com/Fleuronic/workflow-swift",
       "state" : {
         "branch" : "main",
-        "revision" : "a011407f8512a9f03ffa143be1968112908770c5"
+        "revision" : "bfc3d79a75b60240a84cdb55f397fedb38393b26"
       }
     },
     {
@@ -168,7 +177,7 @@
       "location" : "https://github.com/Fleuronic/WorkflowContainers",
       "state" : {
         "branch" : "main",
-        "revision" : "19e0de86200a7e2d73ca6921781f1f7f27ba69d2"
+        "revision" : "419d292b535657da4fcee9bf7b920513b8e32ea0"
       }
     }
   ],
