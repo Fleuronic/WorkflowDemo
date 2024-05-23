@@ -103,16 +103,16 @@ private extension DemoList.Workflow.State {
 		error: Demo.LoadingResult.Failure,
 		dismissHandler: @escaping () -> Void
 	) -> Alert {
-		.init(
+		let message = switch error {
+		case .loadError:
+			"The demos could not be updated. Please try again later."
+		case let .sleepError(error):
+			error.localizedDescription
+		}
+		
+		return .init(
 			title: "Update Error",
-			message: {
-				switch error {
-				case .loadError:
-					"The demos could not be updated. Please try again later."
-				case let .sleepError(error):
-					error.localizedDescription
-				}
-			}(),
+			message: message,
 			actions: [
 				.init(
 					title: "Dismiss",
