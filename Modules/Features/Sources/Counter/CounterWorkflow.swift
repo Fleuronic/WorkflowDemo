@@ -11,7 +11,7 @@ public extension Counter {
 		private let demo: Demo
 		private let fromSource: Bool
 		private let screenWrapper: (Counter.Screen) -> AnyScreen
-
+		
 		public init(demo: Demo) {
 			self.init(
 				demo: demo,
