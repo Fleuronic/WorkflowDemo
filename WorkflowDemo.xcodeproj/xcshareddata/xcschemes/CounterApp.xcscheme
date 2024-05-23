@@ -57,7 +57,7 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "demo"
-            value = "swiftUI"
+            value = "declarativeUIKit"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
