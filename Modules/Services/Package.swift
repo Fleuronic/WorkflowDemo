@@ -4,7 +4,10 @@ import PackageDescription
 let package = Package(
 	name: "Services",
 	platforms: [
-		.iOS(.v16)
+		.iOS(.v13),
+		.macOS(.v10_15),
+		.tvOS(.v13),
+		.watchOS(.v6)
 	],
 	products: [
 		.library(

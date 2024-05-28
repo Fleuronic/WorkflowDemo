@@ -24,7 +24,7 @@
       "location" : "https://github.com/Fleuronic/Ergo",
       "state" : {
         "branch" : "main",
-        "revision" : "72f653c61b009f1e88c61fda6db8a0ed4e6bfe67"
+        "revision" : "0bb5477c7924c59bd2775202af8dcb0107b061c0"
       }
     },
     {
@@ -33,7 +33,7 @@
       "location" : "https://github.com/Fleuronic/ErgoDeclarativeUIKit",
       "state" : {
         "branch" : "main",
-        "revision" : "73e67f51a5b07df5f62066c48c2860570c08ca20"
+        "revision" : "d67dae5a5bc924c55e1423fe5936bebaf4f73a36"
       }
     },
     {
@@ -42,7 +42,7 @@
       "location" : "https://github.com/Fleuronic/ErgoSwiftUI",
       "state" : {
         "branch" : "main",
-        "revision" : "5827af139396e844991f91534f31f751887ce4e5"
+        "revision" : "8bb1c4ec5b1994d5ae2f4907c7b1666f0cb57a3a"
       }
     },
     {
@@ -51,7 +51,7 @@
       "location" : "https://github.com/Fleuronic/ErgoUIKit",
       "state" : {
         "branch" : "main",
-        "revision" : "092188eac94f33363a2e468cbb65b59485d7c5bd"
+        "revision" : "b02803c12347c01d7d63036aecb03c3ec4c8f4ec"
       }
     },
     {
@@ -168,7 +168,7 @@
       "location" : "https://github.com/Fleuronic/workflow-swift",
       "state" : {
         "branch" : "main",
-        "revision" : "bfc3d79a75b60240a84cdb55f397fedb38393b26"
+        "revision" : "e6798d9e5c5fdf890fbdcdd59deaeb93257dc7d8"
       }
     },
     {
@@ -177,7 +177,7 @@
       "location" : "https://github.com/Fleuronic/WorkflowContainers",
       "state" : {
         "branch" : "main",
-        "revision" : "419d292b535657da4fcee9bf7b920513b8e32ea0"
+        "revision" : "3b8119cbb567f52669e70b91da4785a36c826a22"
       }
     }
   ],
