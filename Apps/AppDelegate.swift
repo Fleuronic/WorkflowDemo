@@ -12,6 +12,7 @@ protocol AppDelegate: UIApplicationDelegate {
 
 // MARK: -
 extension AppDelegate {
+	@MainActor
 	func makeWindow() -> UIWindow {
 		let window = UIWindow(frame: UIScreen.main.bounds)
 		window.makeKeyAndVisible()
@@ -19,9 +20,7 @@ extension AppDelegate {
 		
 		Task {
 			let workflow = await self.workflow
-			await MainActor.run {
-				window.rootViewController = WorkflowHostingController(workflow: workflow)
-			}
+			window.rootViewController = WorkflowHostingController(workflow: workflow)
 		}
 		
 		return window
