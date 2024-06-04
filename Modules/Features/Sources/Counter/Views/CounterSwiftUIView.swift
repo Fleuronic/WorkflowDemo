@@ -3,19 +3,17 @@
 import SwiftUI
 import ErgoSwiftUI
 
-public extension Counter.SwiftUI {
-	struct View {
-		public init() {}
-	}
+extension Counter.SwiftUI {
+	struct View {}
 }
 
 // MARK: -
 extension Counter.SwiftUI.View: BodyProvider {
 	// MARK: ScreenBacked
-	public typealias Screen = Counter.SwiftUI.Screen
+	typealias Screen = Counter.SwiftUI.Screen
 
 	// MARK: BodyProvider
-	public static func body(with screen: Screen) -> some View {
+	static func body(with screen: Screen) -> some View {
 		VStack {
 			Text(screen.valueText)
 			Button(action: screen.increment) {
@@ -31,5 +29,5 @@ extension Counter.SwiftUI.View: BodyProvider {
 // MARK: -
 extension Counter.SwiftUI.Screen: BodyBackingScreen {
 	// MARK: BodyBackingScreen
-	public typealias View = Counter.SwiftUI.View
+	typealias View = Counter.SwiftUI.View
 }

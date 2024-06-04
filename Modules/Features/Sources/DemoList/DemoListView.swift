@@ -8,17 +8,17 @@ import ErgoDeclarativeUIKit
 
 import enum Demo.Demo
 
-public extension DemoList {
+extension DemoList {
 	final class View: UIView {}
 }
 
 // MARK: -
 extension DemoList.View: LayoutProvider {
 	// MARK: ScreenBacked
-	public typealias Screen = DemoList.Screen
+	typealias Screen = DemoList.Screen
 
 	// MARK: LayoutProvider
-	public func layout(with screen: some ScreenProxy<Screen>) -> AnyLayout {
+	func layout(with screen: some ScreenProxy<Screen>) -> AnyLayout {
 		UITableView.style(.insetGrouped).content(
 			items: screen.demos,
 			text: \.name,
@@ -31,5 +31,5 @@ extension DemoList.View: LayoutProvider {
 // MARK: -
 extension DemoList.Screen: LayoutBackingScreen {
 	// MARK: LayoutBackingScreen
-	public typealias View = DemoList.View
+	typealias View = DemoList.View
 }

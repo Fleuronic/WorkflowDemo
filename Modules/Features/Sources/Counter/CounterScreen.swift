@@ -3,7 +3,7 @@
 public enum Counter {}
 
 // MARK: -
-public extension Counter {
+extension Counter {
 	struct Screen {
 		let value: Int
 		let increment: () -> Void

@@ -4,7 +4,7 @@ import UIKit
 import ErgoUIKit
 import ErrorAssertions
 
-public extension Counter.UIKit {
+extension Counter.UIKit {
 	final class View: UIView {
 		private let stackView: UIStackView
 		private let valueLabel: UILabel
@@ -17,7 +17,7 @@ public extension Counter.UIKit {
 		required init(coder: NSCoder) { fatalError() }
 		
 		// MARK: Updating
-		public init(screen: Screen) {
+		init(screen: Screen) {
 			valueLabel = .init()
 			incrementButton = .init(type: .system)
 			decrementButton = .init(type: .system)
@@ -42,10 +42,10 @@ public extension Counter.UIKit {
 // MARK: -
 extension Counter.UIKit.View: Updating {
 	// MARK: ScreenBacked
-	public typealias Screen = Counter.UIKit.Screen
+	typealias Screen = Counter.UIKit.Screen
 
 	// MARK: Updating
-	public func update(with screen: Screen) {
+	func update(with screen: Screen) {
 		valueLabel.text = screen.valueText
 		incrementButton.setTitle(screen.incrementTitle, for: .normal)
 		decrementButton.setTitle(screen.decrementTitle, for: .normal)
@@ -66,5 +66,5 @@ private extension Counter.UIKit.View {
 // MARK: -
 extension Counter.UIKit.Screen: UpdatingScreen {
 	// MARK: UpdatingScreen
-	public typealias View = Counter.UIKit.View
+	typealias View = Counter.UIKit.View
 }

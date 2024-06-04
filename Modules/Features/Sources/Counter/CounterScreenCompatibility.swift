@@ -1,20 +1,20 @@
 // Copyright © Fleuronic LLC. All rights reserved.
 
-import protocol Ergo.WrappedScreen
+import WorkflowUI
 
-public extension Counter {
+extension Counter {
 	enum SwiftUI {}
 	enum UIKit {}
 	enum DeclarativeUIKit {}
 }
 
 // MARK: -
-public extension Counter.SwiftUI {
+extension Counter.SwiftUI {
 	@dynamicMemberLookup
 	struct Screen: WrappedScreen {
 		private let screen: Counter.Screen
 		
-		public init(screen: Counter.Screen) {
+		init(screen: Counter.Screen) {
 			self.screen = screen
 		}
 		
@@ -25,12 +25,12 @@ public extension Counter.SwiftUI {
 }
 
 // MARK: -
-public extension Counter.UIKit {
+extension Counter.UIKit {
 	@dynamicMemberLookup
 	struct Screen: WrappedScreen {
 		private let screen: Counter.Screen
 		
-		public init(screen: Counter.Screen) {
+		init(screen: Counter.Screen) {
 			self.screen = screen
 		}
 		
@@ -41,17 +41,31 @@ public extension Counter.UIKit {
 }
 
 // MARK: -
-public extension Counter.DeclarativeUIKit {
+extension Counter.DeclarativeUIKit {
 	@dynamicMemberLookup
 	struct Screen: WrappedScreen {
 		private let screen: Counter.Screen
 		
-		public init(screen: Counter.Screen) {
+		init(screen: Counter.Screen) {
 			self.screen = screen
 		}
 		
 		subscript<Value>(dynamicMember keyPath: KeyPath<Counter.Screen, Value>) -> Value {
 			screen[keyPath: keyPath]
 		}
+	}
+}
+
+// MARK: -
+protocol WrappedScreen: Screen {
+	associatedtype Screen
+
+	init(screen: Screen)
+}
+
+// MARK: -
+extension WrappedScreen {
+	static func wrap(screen: Screen) -> AnyScreen {
+		self.init(screen: screen).asAnyScreen()
 	}
 }

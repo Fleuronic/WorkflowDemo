@@ -9,7 +9,7 @@ public extension Demo {
 }
 
 // MARK: -
-public extension DemoList {
+extension DemoList {
 	struct Screen {
 		let demos: [Demo]
 		let selectDemo: (Demo) -> Void
